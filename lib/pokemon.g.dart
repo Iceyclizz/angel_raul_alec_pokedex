@@ -21,7 +21,7 @@ class PokemonAdapter extends TypeAdapter<Pokemon> {
       name: fields[1] as String,
       type1: fields[2] as dynamic,
       type2: fields[3] as dynamic,
-      image: fields[4] as Blob?,
+      image: fields[4] as Uint8List?,
     );
   }
 
