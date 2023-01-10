@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'dart:typed_data';
 import 'package:hive_flutter/hive_flutter.dart';
 part 'pokemon.g.dart';
 
@@ -13,7 +13,7 @@ class Pokemon{
   @HiveField(3)
   final type2;
   @HiveField(4)
-  final Blob? image;
+  final Uint8List? image;
 
   Pokemon(
       {this.no,

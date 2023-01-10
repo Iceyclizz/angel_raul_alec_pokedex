@@ -10,5 +10,6 @@ class Model{
 
   Model._internal();
 
-  var pokedex = <Pokemon>[Pokemon(no: 1,name: 'Bulbasur', type1: TypeList.planta,type2: TypeList.veneno),];
+  List<Pokemon> pokedex = [Pokemon(no: 1,name: 'Bulbasur', type1: TypeList.planta,type2: TypeList.veneno),];
+  
 }
