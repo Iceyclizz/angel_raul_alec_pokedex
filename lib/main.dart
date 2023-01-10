@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         children: [
           for (Pokemon p in Model().pokedex)
-          ListTile(title: Text(p.name),subtitle: Text("${p.no}"),)
+          ListTile(title: Text("${p.no}""\t""${p.name}"),subtitle: Text("${p.type1.toString()}""\t""${p.type2.toString()}"),)
         ],
       ),
       drawer: Drawer(
@@ -64,6 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       ListTile(
         title: const Text('Creador de equipo'),
+        onTap: () {
+          // Update the state of the app.
+          // ...
+        },
+      ),ListTile(
+        title: const Text('Fakemon'),
         onTap: () {
           // Update the state of the app.
           // ...
