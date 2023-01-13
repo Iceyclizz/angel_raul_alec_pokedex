@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView(
         children: [
           for (Pokemon p in Model().pokedex)
-          ListTile(title: Text("${p.no}""\t""${p.name}"),subtitle: Text("${p.type1.toString()}""\t""${p.type2.toString()}"),)
+          ListTile(title: Row(children: [Text("${p.no}""\t""${p.name}")]),subtitle: Text("${p.type1.toString()}""\t""${p.type2.toString()}"),)
         ],
       ),
       drawer: Drawer(

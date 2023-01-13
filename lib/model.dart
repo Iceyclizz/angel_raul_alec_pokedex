@@ -1,4 +1,7 @@
+import 'dart:collection';
+
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
+import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:angel_raul_alec_pokedex/type.dart';
 
 class Model{
@@ -9,7 +12,25 @@ class Model{
   }
 
   Model._internal();
-
+  var equipo = <Team>[];
+  var tipos= <TypeList,Map<String,List<TypeList>>>{TypeList.acero:{'superefective':[TypeList.fuego,TypeList.lucha,TypeList.tierra],'resistant':[TypeList.acero,TypeList.bicho,TypeList.dragon,TypeList.hada,TypeList.hielo,TypeList.normal,TypeList.planta,TypeList.psiquico,TypeList.roca,TypeList.volador],'immunities':[TypeList.veneno]},
+  TypeList.agua:{'superefective':[TypeList.electrico,TypeList.planta],'resistant':[TypeList.acero,TypeList.agua,TypeList.fuego,TypeList.hielo],'immunities':[]},
+  TypeList.bicho:{'superefective':[TypeList.fuego,TypeList.roca,TypeList.volador],'resistant':[TypeList.lucha,TypeList.planta,TypeList.tierra],'immunities':[]},
+  TypeList.dragon:{'superefective':[TypeList.dragon,TypeList.hada,TypeList.hielo],'resistant':[TypeList.agua,TypeList.electrico,TypeList.fuego,TypeList.planta],'immunities':[]},
+  TypeList.electrico:{'superefective':[TypeList.tierra],'resistant':[TypeList.acero,TypeList.electrico,TypeList.volador],'immunities':[]},
+  TypeList.fantasma:{'superefective':[TypeList.fantasma,TypeList.siniestro],'resistant':[TypeList.bicho,TypeList.veneno],'immunities':[TypeList.lucha,TypeList.normal]},
+  TypeList.fuego:{'superefective':[TypeList.agua,TypeList.roca,TypeList.tierra],'resistant':[TypeList.acero,TypeList.bicho,TypeList.fuego,TypeList.hada,TypeList.hielo,TypeList.planta],'immunities':[]},
+  TypeList.hada:{'superefective':[TypeList.hada,TypeList.veneno],'resistant':[TypeList.bicho,TypeList.lucha,TypeList.siniestro],'immunities':[TypeList.dragon]},
+  TypeList.hielo:{'superefective':[TypeList.acero,TypeList.fuego,TypeList.lucha,TypeList.roca],'resistant':[TypeList.hielo],'immunities':[]},
+  TypeList.lucha:{'superefective':[TypeList.hada,TypeList.psiquico,TypeList.volador],'resistant':[TypeList.bicho,TypeList.roca,TypeList.siniestro],'immunities':[]},
+  TypeList.normal:{'superefective':[TypeList.lucha],'resistant':[],'immunities':[TypeList.fantasma]},
+  TypeList.planta:{'superefective':[TypeList.bicho,TypeList.fuego,TypeList.hielo,TypeList.veneno,TypeList.volador],'resistant':[TypeList.agua,TypeList.electrico,TypeList.planta,TypeList.tierra],'immunities':[]},
+  TypeList.psiquico:{'superefective':[TypeList.bicho,TypeList.fantasma,TypeList.siniestro],'resistant':[TypeList.lucha,TypeList.psiquico],'immunities':[]},
+  TypeList.roca:{'superefective':[TypeList.acero,TypeList.agua,TypeList.lucha,TypeList.planta,TypeList.tierra],'resistant':[TypeList.fuego,TypeList.normal,TypeList.veneno,TypeList.volador],'immunities':[]},
+  TypeList.siniestro:{'superefective':[TypeList.bicho,TypeList.hada,TypeList.lucha],'resistant':[TypeList.fantasma,TypeList.siniestro],'immunities':[TypeList.psiquico]},
+  TypeList.tierra:{'superefective':[TypeList.agua,TypeList.hielo,TypeList.planta],'resistant':[TypeList.roca,TypeList.veneno],'immunities':[TypeList.electrico]},
+  TypeList.veneno:{'superefective':[TypeList.psiquico,TypeList.tierra],'resistant':[TypeList.bicho,TypeList.hada,TypeList.lucha,TypeList.planta,TypeList.veneno],'immunities':[]},
+  TypeList.volador:{'superefective':[TypeList.electrico,TypeList.hielo,TypeList.roca],'resistant':[TypeList.bicho,TypeList.lucha,TypeList.planta],'immunities':[TypeList.tierra]}};
   var pokedex = <Pokemon>[
     Pokemon(no: 1,name: 'Bulbasur', type1: TypeList.planta,type2: TypeList.veneno),
     Pokemon(no: 2,name: 'Ivysaur', type1: TypeList.planta,type2: TypeList.veneno),
