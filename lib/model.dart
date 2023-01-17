@@ -1,8 +1,10 @@
 import 'dart:collection';
+import 'dart:io';
 
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:angel_raul_alec_pokedex/type.dart';
+import 'package:flutter/services.dart';
 
 class Model{
   static final Model _model = Model._internal();
@@ -13,6 +15,7 @@ class Model{
 
   Model._internal();
   var equipo = <Team>[];
+
   var tipos= <TypeList,Map<String,List<TypeList>>>{TypeList.acero:{'superefective':[TypeList.fuego,TypeList.lucha,TypeList.tierra],'resistant':[TypeList.acero,TypeList.bicho,TypeList.dragon,TypeList.hada,TypeList.hielo,TypeList.normal,TypeList.planta,TypeList.psiquico,TypeList.roca,TypeList.volador],'immunities':[TypeList.veneno]},
   TypeList.agua:{'superefective':[TypeList.electrico,TypeList.planta],'resistant':[TypeList.acero,TypeList.agua,TypeList.fuego,TypeList.hielo],'immunities':[]},
   TypeList.bicho:{'superefective':[TypeList.fuego,TypeList.roca,TypeList.volador],'resistant':[TypeList.lucha,TypeList.planta,TypeList.tierra],'immunities':[]},
@@ -283,6 +286,15 @@ class Model{
     Pokemon(no: 249,name: 'Lugia', type1: TypeList.psiquico,type2: TypeList.volador),
     Pokemon(no: 250,name: 'Ho-Oh', type1: TypeList.fuego,type2: TypeList.volador),
     Pokemon(no: 251,name: 'Celebi', type1: TypeList.psiquico,type2: TypeList.planta),
-
   ];
+  Future<void> initapp() async{
+    for (Pokemon p in pokedex){
+      try{
+    ByteData bytes = await rootBundle.load('lib/Pokemons fotos/${p.no.toString().padLeft(3,'0')}.png');
+    p.image=bytes;
+    }catch(e){
+      print('The image doesnt exist');
+    }
+    }
+  }
 }
