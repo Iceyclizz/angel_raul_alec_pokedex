@@ -8,4 +8,7 @@ class Controller<T>{
   void deletefromlist(T pocketentity){
     
   }
+  Future<void> initapp() async{
+    
+  }
 }

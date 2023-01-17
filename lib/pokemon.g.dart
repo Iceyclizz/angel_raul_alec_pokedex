@@ -22,13 +22,14 @@ class PokemonAdapter extends TypeAdapter<Pokemon> {
       type1: fields[2] as dynamic,
       type2: fields[3] as dynamic,
       image: fields[4] as Uint8List?,
+      editable: fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Pokemon obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.no)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class PokemonAdapter extends TypeAdapter<Pokemon> {
       ..writeByte(3)
       ..write(obj.type2)
       ..writeByte(4)
-      ..write(obj.image);
+      ..write(obj.image)
+      ..writeByte(5)
+      ..write(obj.editable);
   }
 
   @override

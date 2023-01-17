@@ -14,11 +14,14 @@ class Pokemon{
   final type2;
   @HiveField(4)
   final Uint8List? image;
+  @HiveField(5)
+  final bool editable;
 
   Pokemon(
       {this.no,
       required this.name,
       required this.type1,
       this.type2,
-      this.image});
+      this.image,
+      this.editable=false});
 }
