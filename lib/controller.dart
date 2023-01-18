@@ -15,11 +15,16 @@ class Controller<T>{
     
   }
   Future<void> initapp() async{
+    WidgetsFlutterBinding.ensureInitialized();
     Model().initapp();
   }
   List<Pokemon> get pokedex => Model().pokedex;
   set pokedex(List<Pokemon> value) {
     Model().pokedex = value;
+  }
+  List<Pokemon> get fakemon => Model().fakemon;
+  set fakemon(List<Pokemon> value) {
+    Model().fakemon = value;
   }
   List<Team> get equipo => Model().equipo;
   set equipo(List<Team> value) {
@@ -30,65 +35,72 @@ class Controller<T>{
     Model().tipos = value;
   }
   Container getcontainertype(TypeList? type){
-    final Color c;
+    final Color containerColor;
+    Color textColor = Colors.black;
     final String poketype;
     switch(type){
       case TypeList.acero:
-      c = Colors.grey;
+      containerColor = Colors.grey;
       break;
       case TypeList.agua:
-      c = Colors.blue;
+      containerColor = Colors.blue;
       break;
       case TypeList.bicho:
-      c = Colors.green.shade900;
+      containerColor = Colors.green.shade900;
+      textColor = Colors.white;
       break;
       case TypeList.dragon:
-      c = Colors.indigo;
+      containerColor = Colors.indigo;
+      textColor = Colors.white;
       break;
       case TypeList.electrico:
-      c = Colors.yellow;
+      containerColor = Colors.yellow;
       break;
       case TypeList.fantasma:
-      c = Colors.purple.shade900;
+      containerColor = Colors.purple.shade900;
+      textColor = Colors.white;
       break;
       case TypeList.fuego:
-      c = Colors.red;
+      containerColor = Colors.red;
       break;
       case TypeList.hada:
-      c = Colors.pink.shade200;
+      containerColor = Colors.pink.shade200;
       break;
       case TypeList.hielo:
-      c = Colors.blue.shade50;
+      containerColor = Colors.blue.shade50;
       break;
       case TypeList.lucha:
-      c = Colors.deepOrange;
+      containerColor = Colors.deepOrange;
       break;
       case TypeList.normal:
-      c = Colors.grey.shade200;
+      containerColor = Colors.grey.shade200;
       break;
       case TypeList.planta:
-      c = Colors.green;
+      containerColor = Colors.green;
       break;
       case TypeList.psiquico:
-      c = Colors.purple.shade200;
+      containerColor = Colors.purple.shade200;
       break;
       case TypeList.roca:
-      c = Colors.brown;
+      containerColor = Colors.brown;
+      textColor = Colors.white;
       break;
       case TypeList.siniestro:
-      c = Colors.black87;
+      containerColor = Colors.black87;
+      textColor = Colors.white;
       break;
       case TypeList.tierra:
-      c = Colors.orange.shade200;
+      containerColor = Colors.orange.shade200;
       break;
       case TypeList.veneno:
-      c = Colors.purple.shade800;
+      containerColor = Colors.purple.shade800;
+      textColor = Colors.white;
       break;
       case TypeList.volador:
-      c = Colors.lightBlue.shade100;
+      containerColor = Colors.lightBlue.shade100;
       break;
       default:
-      c = Colors.white;
+      containerColor = Colors.white;
       break;
     }
     if (type == null){
@@ -96,6 +108,6 @@ class Controller<T>{
     }else{
       poketype=type.name.toUpperCase();
     }
-    return Container(color: c,child: Text(poketype),);
+    return Container(color: containerColor,child: Text(poketype,style: TextStyle(color: textColor),),padding: EdgeInsets.all(3.0),);
   }
 }

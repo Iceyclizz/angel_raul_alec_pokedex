@@ -34,6 +34,7 @@ class Model{
   TypeList.tierra:{'superefective':[TypeList.agua,TypeList.hielo,TypeList.planta],'resistant':[TypeList.roca,TypeList.veneno],'immunities':[TypeList.electrico]},
   TypeList.veneno:{'superefective':[TypeList.psiquico,TypeList.tierra],'resistant':[TypeList.bicho,TypeList.hada,TypeList.lucha,TypeList.planta,TypeList.veneno],'immunities':[]},
   TypeList.volador:{'superefective':[TypeList.electrico,TypeList.hielo,TypeList.roca],'resistant':[TypeList.bicho,TypeList.lucha,TypeList.planta],'immunities':[TypeList.tierra]}};
+  var fakemon = <Pokemon>[];
   var pokedex = <Pokemon>[
     Pokemon(no: 1,name: 'Bulbasur', type1: TypeList.planta,type2: TypeList.veneno),
     Pokemon(no: 2,name: 'Ivysaur', type1: TypeList.planta,type2: TypeList.veneno),
