@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/model.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
+import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      
     );
   }
 }
@@ -38,7 +40,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  Controller _controller = Controller();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,11 +49,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView(
         children: [
-          for (Pokemon p in Model().pokedex)
-          ListTile(title: Row(children: [Text("${p.no}""\t""${p.name}")]),subtitle: Text("${p.type1.toString()}""\t""${p.type2.toString()}"),)
+          for (Pokemon p in _controller.pokedex)
+          ListTile(title: Row(children: [
+            if (p.image!=null)
+            Image.memory(p.image!.buffer.asUint8List(p.image!.offsetInBytes,p.image!.lengthInBytes),scale: 10),
+            Card(child: Text("#${p.no}""\t""${p.name}"),)
+            ]),subtitle: Row(children: [_controller.getcontainertype(p.type1),_controller.getcontainertype(p.type2)]),)
         ],
-      ),
-      drawer: Drawer(
+      ),drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
     children: [
