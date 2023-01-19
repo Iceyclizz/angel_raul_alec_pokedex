@@ -4,6 +4,7 @@ import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/fakemonlist.dart';
 import 'package:angel_raul_alec_pokedex/model.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
+import 'package:angel_raul_alec_pokedex/teamView.dart';
 import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Pokedex(),
         '/fakemon': (context) => const FakemonView(),
+        '/teamView': (context) => const teamView(),
       },
     );
   }
@@ -110,8 +112,11 @@ class Hamburgesa extends StatelessWidget {
         ListTile(
           title: const Text('Creador de equipo'),
           onTap: () {
-            // Update the state of the app.
-            // ...
+            if (ruta == '/teamView') {
+              Navigator.pop(context);
+            } else {
+              Navigator.popAndPushNamed(context, '/teamView');
+            }
           },
         ),
         ListTile(
