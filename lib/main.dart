@@ -2,12 +2,7 @@ import 'dart:io';
 
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/fakemonlist.dart';
-import 'package:angel_raul_alec_pokedex/model.dart';
-import 'package:angel_raul_alec_pokedex/pokemon.dart';
-import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
 
 void main() async {
   runApp(const MyApp());
