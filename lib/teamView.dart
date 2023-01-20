@@ -1,6 +1,8 @@
 import 'package:angel_raul_alec_pokedex/main.dart';
 import 'package:flutter/material.dart';
 
+import 'TeamCreator.dart';
+
 class teamView extends StatefulWidget {
   const teamView({Key? key}) : super(key: key);
 
@@ -21,7 +23,7 @@ class _PokemonviewState extends State<teamView> {
         floatingActionButton: FloatingActionButton(
             onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Pokedex()),
+                  MaterialPageRoute(builder: (context) => const teamCreator()),
                 ),
             tooltip: 'Add Item',
             child: Icon(Icons.add)),
