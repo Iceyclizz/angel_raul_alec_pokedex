@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:angel_raul_alec_pokedex/controller.dart';
+import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:flutter/material.dart';
 
 class Pokemonview extends StatefulWidget {
-  const Pokemonview({Key? key}) : super(key: key);
+  const Pokemonview({Key? key, required this.pokemon}) : super(key: key);
+  final Pokemon pokemon;
 
   @override
   _PokemonviewState createState() => _PokemonviewState();
@@ -11,29 +14,33 @@ class Pokemonview extends StatefulWidget {
 
 class _PokemonviewState extends State<Pokemonview> {
   @override
-  var imagenpokemon = File('Pokemonfotos/001.png');
+  final Controller _controller = Controller();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PukimonPito Nº001'),
+        title: Text(widget.pokemon.name + ' #' + widget.pokemon.no.toString()),
       ),
-      //body: Image.file(imagenpokemon)
       body: Card(
         child: Column(
           children: [
-            Expanded(
-              child: Text('IMAGEN'),
-              flex: 4,
-            ),
+            if (widget.pokemon.image != null)
+              Expanded(
+                child: Image.memory(
+                  widget.pokemon.image!.buffer.asUint8List(
+                      widget.pokemon.image!.offsetInBytes,
+                      widget.pokemon.image!.lengthInBytes),
+                ),
+                flex: 4,
+              ),
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: Text('Tipo 1: '),
+                    child: _controller.getcontainertype(widget.pokemon.type1),
                     flex: 1,
                   ),
                   Expanded(
-                    child: Text('Tipo 2: '),
+                    child: _controller.getcontainertype(widget.pokemon.type2),
                     flex: 1,
                   )
                 ],
