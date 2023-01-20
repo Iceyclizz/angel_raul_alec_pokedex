@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Pokedex(),
         '/fakemon': (context) => const FakemonView(),
+        '/teamView': (context) => const teamView(),
       },
     );
   }
@@ -105,8 +106,11 @@ class Hamburgesa extends StatelessWidget {
         ListTile(
           title: const Text('Creador de equipo'),
           onTap: () {
-            // Update the state of the app.
-            // ...
+            if (ruta == '/teamView') {
+              Navigator.pop(context);
+            } else {
+              Navigator.popAndPushNamed(context, '/teamView');
+            }
           },
         ),
         ListTile(
