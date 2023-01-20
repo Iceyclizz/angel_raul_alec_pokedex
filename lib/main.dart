@@ -4,11 +4,10 @@ import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/fakemonlist.dart';
 import 'package:angel_raul_alec_pokedex/model.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
+import 'package:angel_raul_alec_pokedex/pokemonView.dart';
 import 'package:angel_raul_alec_pokedex/teamView.dart';
 import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Pokedex Chilena',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -29,6 +28,15 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Pokedex(),
         '/fakemon': (context) => const FakemonView(),
         '/teamView': (context) => const teamView(),
+      },
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case '/pokemonView':
+            return MaterialPageRoute(
+              builder: (context) =>
+                  Pokemonview(pokemon: settings.arguments as Pokemon),
+            );
+        }
       },
     );
   }
@@ -55,26 +63,33 @@ class _PokedexState extends State<Pokedex> {
             body: ListView.builder(
               itemCount: _controller.pokedex.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Row(children: [
-                    if (_controller.pokedex[index].image != null)
-                      Image.memory(
-                          _controller.pokedex[index].image!.buffer.asUint8List(
-                              _controller.pokedex[index].image!.offsetInBytes,
-                              _controller.pokedex[index].image!.lengthInBytes),
-                          scale: 10),
-                    Card(
-                      child: Text("#${_controller.pokedex[index].no}"
-                          "\t"
-                          "${_controller.pokedex[index].name}"),
-                    )
-                  ]),
-                  subtitle: Row(children: [
-                    _controller
-                        .getcontainertype(_controller.pokedex[index].type1),
-                    _controller
-                        .getcontainertype(_controller.pokedex[index].type2)
-                  ]),
+                return GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, '/pokemonView',
+                      arguments: _controller.pokedex[index]),
+                  child: ListTile(
+                    title: Row(children: [
+                      if (_controller.pokedex[index].image != null)
+                        Image.memory(
+                            _controller.pokedex[index].image!.buffer
+                                .asUint8List(
+                                    _controller
+                                        .pokedex[index].image!.offsetInBytes,
+                                    _controller
+                                        .pokedex[index].image!.lengthInBytes),
+                            scale: 10),
+                      Card(
+                        child: Text("#${_controller.pokedex[index].no}"
+                            "\t"
+                            "${_controller.pokedex[index].name}"),
+                      )
+                    ]),
+                    subtitle: Row(children: [
+                      _controller
+                          .getcontainertype(_controller.pokedex[index].type1),
+                      _controller
+                          .getcontainertype(_controller.pokedex[index].type2)
+                    ]),
+                  ),
                 );
               },
             ),
