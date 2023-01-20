@@ -13,7 +13,7 @@ class Pokemon{
   @HiveField(3)
   final type2;
   @HiveField(4)
-  final Uint8List? image;
+  ByteData? image;
   @HiveField(5)
   final bool editable;
 
