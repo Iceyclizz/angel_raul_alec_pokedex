@@ -8,8 +8,6 @@ import 'package:angel_raul_alec_pokedex/pokemonView.dart';
 import 'package:angel_raul_alec_pokedex/teamView.dart';
 import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
 
 void main() async {
   runApp(const MyApp());

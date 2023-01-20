@@ -19,8 +19,8 @@ class PokemonAdapter extends TypeAdapter<Pokemon> {
     return Pokemon(
       no: fields[0] as int?,
       name: fields[1] as String,
-      type1: fields[2] as dynamic,
-      type2: fields[3] as dynamic,
+      type1: fields[2] as TypeList,
+      type2: fields[3] as TypeList?,
       image: fields[4] as ByteData?,
       editable: fields[5] as bool,
     );

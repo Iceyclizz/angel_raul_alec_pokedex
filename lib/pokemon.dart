@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 part 'pokemon.g.dart';
 
@@ -9,9 +10,9 @@ class Pokemon{
   @HiveField(1)
   final String name;
   @HiveField(2)
-  final type1;
+  final TypeList type1;
   @HiveField(3)
-  final type2;
+  final TypeList? type2;
   @HiveField(4)
   ByteData? image;
   @HiveField(5)
