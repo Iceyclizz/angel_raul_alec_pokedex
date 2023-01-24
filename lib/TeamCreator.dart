@@ -60,7 +60,7 @@ class teamCreatorState extends State<teamCreator> {
                                   miController.pokedex[12],
                                   miController.pokedex[20]
                                 ]);
-                            miController.equipo = [equipo1];
+                            miController.equipo.add(equipo1);
                             Navigator.pop(context);
                           }
                         },

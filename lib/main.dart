@@ -5,6 +5,8 @@ import 'package:angel_raul_alec_pokedex/pokemonView.dart';
 import 'package:angel_raul_alec_pokedex/teamView.dart';
 import 'package:flutter/material.dart';
 
+import 'TeamCreator.dart';
+
 void main() async {
   runApp(const MyApp());
 }
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Pokedex(),
         '/fakemon': (context) => const FakemonView(),
         '/teamView': (context) => const teamView(),
+        '/teamCreator': (context) => const teamCreator(),
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
