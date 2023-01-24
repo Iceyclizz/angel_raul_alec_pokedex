@@ -18,15 +18,19 @@ class _PokemonviewState extends State<teamView> {
           title: const Text('Team View'),
         ),
         body: ListView(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+
         ),
         floatingActionButton: FloatingActionButton(
-            onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const teamCreator()),
-                ),
+            onPressed: () => setState(() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const teamCreator()),
+                  );
+                }),
             tooltip: 'Add Item',
-            child: Icon(Icons.add)),
+            child: const Icon(Icons.add)),
         drawer: const Hamburgesa(ruta: '/teamView'));
   }
 }

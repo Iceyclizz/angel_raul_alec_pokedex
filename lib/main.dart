@@ -1,12 +1,8 @@
-import 'dart:io';
-
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/fakemonlist.dart';
-import 'package:angel_raul_alec_pokedex/model.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/pokemonView.dart';
 import 'package:angel_raul_alec_pokedex/teamView.dart';
-import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -37,6 +33,7 @@ class MyApp extends StatelessWidget {
                   Pokemonview(pokemon: settings.arguments as Pokemon),
             );
         }
+        return null;
       },
     );
   }
@@ -58,7 +55,7 @@ class _PokedexState extends State<Pokedex> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Pokédex'),
+              title: const Text('Pokédex'),
             ),
             body: ListView.builder(
               itemCount: _controller.pokedex.length,

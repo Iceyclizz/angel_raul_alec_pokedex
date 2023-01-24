@@ -109,12 +109,12 @@ class Controller<T> {
     }
     return Container(
       color: containerColor,
+      padding: const EdgeInsets.all(3.0),
       child: Text(
         poketype,
         style: TextStyle(color: textColor),
         textAlign: TextAlign.center,
       ),
-      padding: EdgeInsets.all(3.0),
     );
   }
 }
