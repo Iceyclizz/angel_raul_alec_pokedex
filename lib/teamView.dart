@@ -24,16 +24,14 @@ class _PokemonviewState extends State<teamView> {
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               title: Row(children: [
-                if (miController.equipo[index].equipopokemon!=null)
-                for (Pokemon p in miController.equipo[index].equipopokemon!)
-                  Image.memory(
-                      p.image!.buffer.asUint8List(p.image!.offsetInBytes,
-                          p.image!.lengthInBytes),
-                      scale: 10),
+                if (miController.equipo[index].equipopokemon != null)
+                  for (Pokemon p in miController.equipo[index].equipopokemon!)
+                    Image.memory(
+                        p.image!.buffer.asUint8List(
+                            p.image!.offsetInBytes, p.image!.lengthInBytes),
+                        scale: 10),
               ]),
-              subtitle: Text(
-                  miController.equipo[index].name
-              ),
+              subtitle: Text(miController.equipo[index].name),
             );
           },
         ),
