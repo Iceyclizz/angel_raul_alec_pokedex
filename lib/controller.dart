@@ -33,6 +33,113 @@ class Controller<T> {
     Model().tipos = value;
   }
 
+  Widget calculatabla(TypeList? tipo1, TypeList? tipo2) {
+    var tablatipos = <TypeList, double>{};
+    for (TypeList i in this.tipos[tipo1]!['superefective']!) {
+      tablatipos[i] = (tablatipos[i] ?? 1) * 2;
+    }
+    for (TypeList i in this.tipos[tipo2]!['superefective']!) {
+      tablatipos[i] = (tablatipos[i] ?? 1) * 2;
+    }
+    for (TypeList i in this.tipos[tipo1]!['resistant']!) {
+      tablatipos[i] = (tablatipos[i] ?? 1) * 0.5;
+    }
+    for (TypeList i in this.tipos[tipo2]!['resistant']!) {
+      tablatipos[i] = (tablatipos[i] ?? 1) * 0.5;
+    }
+    for (TypeList i in this.tipos[tipo1]!['immunities']!) {
+      tablatipos[i] = (tablatipos[i] ?? 1) * 0;
+    }
+    for (TypeList i in this.tipos[tipo2]!['immunities']!) {
+      tablatipos[i] = (tablatipos[i] ?? 1) * 0;
+    }
+
+    return Row(
+      children: [
+        Expanded(
+            child: Card(
+              child: ListView(
+                children: [
+                  ListTile(
+                    title: Text('x4'),
+                  ),
+                  for (TypeList i in tablatipos.keys)
+                    if (tablatipos[i] == 4)
+                      ListTile(
+                        title: getcontainertype(i),
+                      )
+                ],
+              ),
+            ),
+            flex: 1),
+        Expanded(
+            child: Card(
+              child: ListView(
+                children: [
+                  ListTile(
+                    title: Text('x2'),
+                  ),
+                  for (TypeList i in tablatipos.keys)
+                    if (tablatipos[i] == 2)
+                      ListTile(
+                        title: getcontainertype(i),
+                      )
+                ],
+              ),
+            ),
+            flex: 1),
+        Expanded(
+            child: Card(
+              child: ListView(
+                children: [
+                  ListTile(
+                    title: Text('x0.5'),
+                  ),
+                  for (TypeList i in tablatipos.keys)
+                    if (tablatipos[i] == 0.5)
+                      ListTile(
+                        title: getcontainertype(i),
+                      )
+                ],
+              ),
+            ),
+            flex: 1),
+        Expanded(
+            child: Card(
+              child: ListView(
+                children: [
+                  ListTile(
+                    title: Text('x0.25'),
+                  ),
+                  for (TypeList i in tablatipos.keys)
+                    if (tablatipos[i] == 0.25)
+                      ListTile(
+                        title: getcontainertype(i),
+                      )
+                ],
+              ),
+            ),
+            flex: 1),
+        Expanded(
+            child: Card(
+              child: ListView(
+                children: [
+                  ListTile(
+                    title: Text('x0'),
+                  ),
+                  for (TypeList i in tablatipos.keys)
+                    if (tablatipos[i] == 0)
+                      ListTile(
+                        title: getcontainertype(i),
+                      )
+                ],
+              ),
+            ),
+            flex: 1)
+      ],
+    );
+  }
+
   Container getcontainertype(TypeList? type) {
     final Color containerColor;
     Color textColor = Colors.black;

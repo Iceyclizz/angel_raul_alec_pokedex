@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'dart:io';
 
 import 'package:angel_raul_alec_pokedex/controller.dart';
@@ -48,22 +50,8 @@ class _PokemonviewState extends State<Pokemonview> {
               flex: 1,
             ),
             Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ListView(),
-                      flex: 1,
-                    ),
-                    Expanded(
-                      child: ListView(),
-                      flex: 1,
-                    ),
-                    Expanded(
-                      child: ListView(),
-                      flex: 1,
-                    )
-                  ],
-                ),
+                child: _controller.calculatabla(
+                    widget.pokemon.type1, widget.pokemon.type2),
                 flex: 3)
           ],
         ),
