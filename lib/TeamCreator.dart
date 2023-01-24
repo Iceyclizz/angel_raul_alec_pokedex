@@ -19,13 +19,26 @@ class teamCreatorState extends State<teamCreator> {
         children: [
           Expanded(
             flex: 1,
-            child: TextFormField(
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Por favor, ingresa un nombre a tu equipo';
-                }
-              },
-            ),
+            child: Row(children: <Widget>[
+              Expanded(
+                child: TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Por favor, ingresa un nombre a tu equipo';
+                    }
+                  },
+                ),
+              ),
+              Expanded(
+                child: TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Por favor, ingresa un nombre a tu equipo';
+                    }
+                  },
+                ),
+              ),
+            ]),
           ),
           Expanded(
             flex: 13,
@@ -155,7 +168,6 @@ class teamCreatorState extends State<teamCreator> {
               ),
             ]),
           ),
-
         ],
       ),
     );
