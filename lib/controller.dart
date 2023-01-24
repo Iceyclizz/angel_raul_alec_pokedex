@@ -33,6 +33,29 @@ class Controller<T> {
     Model().tipos = value;
   }
 
+  Map<TypeList, double> calculatabla(TypeList? tipo1, TypeList? tipo2) {
+    var tabla = <TypeList, double>{};
+    for (TypeList i in this.tipos[tipo1]!['superefective']!) {
+      tabla[i] = (tabla[i] ?? 1) * 2;
+    }
+    for (TypeList i in this.tipos[tipo2]!['superefective']!) {
+      tabla[i] = (tabla[i] ?? 1) * 2;
+    }
+    for (TypeList i in this.tipos[tipo1]!['resistant']!) {
+      tabla[i] = (tabla[i] ?? 1) * 0.5;
+    }
+    for (TypeList i in this.tipos[tipo2]!['resistant']!) {
+      tabla[i] = (tabla[i] ?? 1) * 0.5;
+    }
+    for (TypeList i in this.tipos[tipo1]!['immunities']!) {
+      tabla[i] = (tabla[i] ?? 1) * 0;
+    }
+    for (TypeList i in this.tipos[tipo2]!['immunities']!) {
+      tabla[i] = (tabla[i] ?? 1) * 0;
+    }
+    return tabla;
+  }
+
   Container getcontainertype(TypeList? type) {
     final Color containerColor;
     Color textColor = Colors.black;
