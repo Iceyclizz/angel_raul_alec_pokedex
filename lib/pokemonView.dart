@@ -51,7 +51,18 @@ class _PokemonviewState extends State<Pokemonview> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: ListView(),
+                      child: ListView(children: <Widget>[
+                        Container(
+                          height: 50,
+                          color: Colors.amber[600],
+                          child: const Center(child: Text('Entry A')),
+                        ),
+                        Container(
+                          height: 50,
+                          color: Colors.amber[500],
+                          child: const Center(child: Text('Entry B')),
+                        ),
+                      ]),
                       flex: 1,
                     ),
                     Expanded(
