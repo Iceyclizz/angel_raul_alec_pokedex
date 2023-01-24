@@ -50,33 +50,8 @@ class _PokemonviewState extends State<Pokemonview> {
               flex: 1,
             ),
             Expanded(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ListView(
-                        padding: const EdgeInsets.all(8),
-                        children: <Widget>[
-                          Container(
-                            child: Center(
-                                child: Text(_controller
-                                    .calculatabla(widget.pokemon.type1,
-                                        widget.pokemon.type2)[1]
-                                    .toString())),
-                          ),
-                        ],
-                      ),
-                      flex: 1,
-                    ),
-                    Expanded(
-                      child: ListView(),
-                      flex: 1,
-                    ),
-                    Expanded(
-                      child: ListView(),
-                      flex: 1,
-                    )
-                  ],
-                ),
+                child: _controller.calculatabla(
+                    widget.pokemon.type1, widget.pokemon.type2),
                 flex: 3)
           ],
         ),
