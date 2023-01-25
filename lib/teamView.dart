@@ -1,7 +1,8 @@
 import 'package:angel_raul_alec_pokedex/main.dart';
+import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:flutter/material.dart';
 
-import 'TeamCreator.dart';
+import 'controller.dart';
 
 class teamView extends StatefulWidget {
   const teamView({Key? key}) : super(key: key);
@@ -11,22 +12,36 @@ class teamView extends StatefulWidget {
 }
 
 class _PokemonviewState extends State<teamView> {
+  final Controller miController = Controller();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Team View'),
         ),
-        body: ListView(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
+        body: ListView.builder(
+          itemCount: miController.equipo.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Row(children: [
+                if (miController.equipo[index].equipopokemon != null)
+                  for (Pokemon p in miController.equipo[index].equipopokemon!)
+                    Image.memory(
+                        p.image!.buffer.asUint8List(
+                            p.image!.offsetInBytes, p.image!.lengthInBytes),
+                        scale: 10),
+              ]),
+              subtitle: Text(miController.equipo[index].name),
+            );
+          },
         ),
         floatingActionButton: FloatingActionButton(
-            onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const teamCreator()),
-                ),
+            onPressed: () async {
+              await Navigator.pushNamed(context, '/teamCreator');
+              setState(() {});
+            },
             tooltip: 'Add Item',
-            child: Icon(Icons.add)),
+            child: const Icon(Icons.add)),
         drawer: const Hamburgesa(ruta: '/teamView'));
   }
 }

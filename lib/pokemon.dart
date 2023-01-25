@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 part 'pokemon.g.dart';
 
 @HiveType(typeId: 0)
-class Pokemon{
+class Pokemon {
   @HiveField(0)
   final int? no;
   @HiveField(1)

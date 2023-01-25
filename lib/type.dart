@@ -42,12 +42,15 @@ enum TypeList {
 }
 
 @HiveType(typeId: 1)
-class PokemonType{
+class PokemonType {
   @HiveField(0)
   final TypeList name;
   @HiveField(1)
   final List<TypeList> debilidades;
   @HiveField(2)
   final List<TypeList> resistencia;
-  PokemonType({required this.name,required this.debilidades,required this.resistencia});
+  PokemonType(
+      {required this.name,
+      required this.debilidades,
+      required this.resistencia});
 }

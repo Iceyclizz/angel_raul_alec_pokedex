@@ -6,6 +6,7 @@ import 'package:angel_raul_alec_pokedex/teamView.dart';
 import 'package:flutter/material.dart';
 
 import 'fakemonform.dart';
+import 'TeamCreator.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/fakemon': (context) => const FakemonView(),
         '/teamView': (context) => const teamView(),
         '/fakemon/new':(context) => Fakemonform(),
+        '/teamCreator': (context) => const teamCreator(),
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -43,6 +45,7 @@ class MyApp extends StatelessWidget {
           default:
           return null;
         }
+        return null;
       },
     );
   }
