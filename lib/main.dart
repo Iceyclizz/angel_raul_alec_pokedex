@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           case '/pokemonView':
             return MaterialPageRoute(
               builder: (context) =>
-                  Pokemonview(pokemon: settings.arguments as Pokemon),
+                  Pokemonview(pokemon: (settings.arguments as Map)["objeto"] as Pokemon,index: (settings.arguments as Map)["index"] as int),
             );
             case '/fakemon/edit':
             return MaterialPageRoute(
@@ -74,7 +74,7 @@ class _PokedexState extends State<Pokedex> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () => Navigator.pushNamed(context, '/pokemonView',
-                      arguments: _controller.pokedex[index]),
+                      arguments: {"objeto": _controller.pokedex[index], "index": index}),
                   child: ListTile(
                     title: Row(children: [
                       if (_controller.pokedex[index].image != null)

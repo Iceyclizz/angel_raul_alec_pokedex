@@ -23,7 +23,7 @@ class _FakemonViewState extends State<FakemonView> {
           itemBuilder: (context, index) {
             return GestureDetector(
                             onTap: () async {
-                              await Navigator.pushNamed(context, "/fakemon/edit",
+                              await Navigator.pushNamed(context, '/pokemonView',
                                   arguments: {"objeto": _controller.fakemon[index], "index": index});
                               setState(() {});
                             },
