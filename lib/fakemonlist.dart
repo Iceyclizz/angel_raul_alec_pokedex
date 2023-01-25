@@ -1,4 +1,3 @@
-import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +16,19 @@ class _FakemonViewState extends State<FakemonView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Fakemon'),
+          title: const Text('Fakemon'),
         ),
         body: ListView.builder(
           itemCount: _controller.fakemon.length,
           itemBuilder: (context, index) {
-            return ListTile(
+            return GestureDetector(
+                            onTap: () async {
+                              await Navigator.pushNamed(context, "/fakemon/edit",
+                                  arguments: {"objeto": _controller.fakemon[index], "index": index});
+                              setState(() {});
+                            },
+                            child: 
+            ListTile(
               title: Row(children: [
                 if (_controller.fakemon[index].image != null)
                   Image.memory(
@@ -31,8 +37,7 @@ class _FakemonViewState extends State<FakemonView> {
                           _controller.fakemon[index].image!.lengthInBytes),
                       scale: 10),
                 Card(
-                  child: Text("#${_controller.fakemon[index].no}"
-                      "\t"
+                  child: Text(
                       "${_controller.fakemon[index].name}"),
                 )
               ]),
@@ -40,14 +45,16 @@ class _FakemonViewState extends State<FakemonView> {
                 _controller.getcontainertype(_controller.fakemon[index].type1),
                 _controller.getcontainertype(_controller.fakemon[index].type2)
               ]),
-            );
+            ));
           },
         ),
         drawer: const Hamburgesa(ruta: '/fakemon'),
         floatingActionButton: FloatingActionButton(
               onPressed: () async {
                 await Navigator.of(context).pushNamed("/fakemon/new");
-                setState(() {});
+                setState(() {
+
+                });
               },
               tooltip: 'Afegir fakemon',
               child: const Icon(Icons.add),

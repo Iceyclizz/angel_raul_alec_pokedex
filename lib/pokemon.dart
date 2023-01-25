@@ -25,4 +25,25 @@ class Pokemon{
       this.type2,
       this.image,
       this.editable=false});
+  TempPokemon pokemonToTempPokemon(){
+    return TempPokemon(name: name, type1: type1,type2: type2,image: image,editable: true);
+  }
+}
+class TempPokemon{
+  String? name;
+  TypeList? type1;
+  TypeList? type2;
+  ByteData? image;
+  bool editable;
+
+  TempPokemon(
+      {
+      this.name,
+      this.type1,
+      this.type2,
+      this.image,
+      this.editable=false});
+  Pokemon tempPokemonToPokemon(){
+    return Pokemon(name: name!, type1: type1!,type2: type2,image: image,editable: true);
+  }
 }

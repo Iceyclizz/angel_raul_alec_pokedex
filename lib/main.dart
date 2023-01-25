@@ -1,13 +1,11 @@
-import 'dart:io';
-
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/fakemonlist.dart';
-import 'package:angel_raul_alec_pokedex/model.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/pokemonView.dart';
 import 'package:angel_raul_alec_pokedex/teamView.dart';
-import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/material.dart';
+
+import 'fakemonform.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -28,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Pokedex(),
         '/fakemon': (context) => const FakemonView(),
         '/teamView': (context) => const teamView(),
+        '/fakemon/new':(context) => Fakemonform(),
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -36,6 +35,13 @@ class MyApp extends StatelessWidget {
               builder: (context) =>
                   Pokemonview(pokemon: settings.arguments as Pokemon),
             );
+            case '/fakemon/edit':
+            return MaterialPageRoute(
+              builder: (context) =>
+                  Fakemonform(fakemon: (settings.arguments as Map)["objeto"] as Pokemon,index: (settings.arguments as Map)["index"] as int,),
+            );
+          default:
+          return null;
         }
       },
     );
@@ -58,7 +64,7 @@ class _PokedexState extends State<Pokedex> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Pokédex'),
+              title: const Text('Pokédex'),
             ),
             body: ListView.builder(
               itemCount: _controller.pokedex.length,

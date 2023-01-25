@@ -5,9 +5,42 @@ import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/material.dart';
 
 class Controller<T> {
-  void addtolist(T pocketentity) {}
-  void updatelist(T pocketentity) {}
-  void deletefromlist(T pocketentity) {}
+  void addtolist(T pocketentity) {
+    switch (pocketentity.runtimeType) {
+      case Pokemon:
+        fakemon.add(pocketentity as Pokemon);
+        break;
+      case Team:
+        equipo.add(pocketentity as Team);
+        break;
+      default:
+      break;
+    }
+  }
+  void updatelist(T pocketentity,int index) {
+switch (pocketentity.runtimeType) {
+      case Pokemon:
+        fakemon[index]=pocketentity as Pokemon;
+        break;
+      case Team:
+        equipo[index]=pocketentity as Team;
+        break;
+      default:
+      break;
+    }
+  }
+  void deletefromlist(T pocketentity,int index) {
+    switch (pocketentity.runtimeType) {
+      case Pokemon:
+      fakemon.removeAt(index);
+        break;
+      case Team:
+        equipo.removeAt(index);
+        break;
+      default:
+      break;
+    }
+  }
   Future<void> initapp() async {
     WidgetsFlutterBinding.ensureInitialized();
     Model().initapp();
@@ -35,22 +68,22 @@ class Controller<T> {
 
   Map<TypeList, double> calculatabla(TypeList? tipo1, TypeList? tipo2) {
     var tabla = <TypeList, double>{};
-    for (TypeList i in this.tipos[tipo1]!['superefective']!) {
+    for (TypeList i in tipos[tipo1]!['superefective']!) {
       tabla[i] = (tabla[i] ?? 1) * 2;
     }
-    for (TypeList i in this.tipos[tipo2]!['superefective']!) {
+    for (TypeList i in tipos[tipo2]!['superefective']!) {
       tabla[i] = (tabla[i] ?? 1) * 2;
     }
-    for (TypeList i in this.tipos[tipo1]!['resistant']!) {
+    for (TypeList i in tipos[tipo1]!['resistant']!) {
       tabla[i] = (tabla[i] ?? 1) * 0.5;
     }
-    for (TypeList i in this.tipos[tipo2]!['resistant']!) {
+    for (TypeList i in tipos[tipo2]!['resistant']!) {
       tabla[i] = (tabla[i] ?? 1) * 0.5;
     }
-    for (TypeList i in this.tipos[tipo1]!['immunities']!) {
+    for (TypeList i in tipos[tipo1]!['immunities']!) {
       tabla[i] = (tabla[i] ?? 1) * 0;
     }
-    for (TypeList i in this.tipos[tipo2]!['immunities']!) {
+    for (TypeList i in tipos[tipo2]!['immunities']!) {
       tabla[i] = (tabla[i] ?? 1) * 0;
     }
     return tabla;
@@ -132,12 +165,12 @@ class Controller<T> {
     }
     return Container(
       color: containerColor,
+      padding: const EdgeInsets.all(3.0),
       child: Text(
         poketype,
         style: TextStyle(color: textColor),
         textAlign: TextAlign.center,
       ),
-      padding: EdgeInsets.all(3.0),
     );
   }
 }
