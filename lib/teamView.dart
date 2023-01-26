@@ -32,10 +32,11 @@ class _PokemonviewState extends State<teamView> {
               ]),
               subtitle: Text(miController.equipo[index].name),
               onTap: () async {
-                Navigator.pushNamed(context, '/teamCreator/edit', arguments: {
+                await Navigator.pushNamed(context, '/teamCreator/edit', arguments: {
                   "objeto": miController.equipo[index],
                   "index": index
                 });
+                setState(() {});
               },
             );
           },

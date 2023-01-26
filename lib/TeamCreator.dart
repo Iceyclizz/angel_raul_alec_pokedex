@@ -47,11 +47,14 @@ class teamCreatorState extends State<teamCreator> {
                           Icons.close,
                           color: Colors.white,
                         ),
-                        onPressed: () {
-                          if (_formkey.currentState != null &&
-                              _formkey.currentState!.validate()) {
-                            _formkey.currentState!.save();
-                            miController.addtolist(widget.equipoTemporal.teamConverter());
+                        onPressed: () async {
+                          if (await miController.askUserDialog(
+                              context, 'Seguro que quieres eliminar')) {
+                            if (widget.index != null) {
+                              miController.deletefromlist(
+                                  widget.equipoTemporal.teamConverter(),
+                                  widget.index!);
+                            }
                             Navigator.pop(context);
                           }
                         },
@@ -86,7 +89,14 @@ class teamCreatorState extends State<teamCreator> {
                           if (_formkey.currentState != null &&
                               _formkey.currentState!.validate()) {
                             _formkey.currentState!.save();
-                            miController.equipo.add(widget.equipoTemporal.teamConverter());
+                            if (widget.index != null) {
+                              miController.updatelist(
+                                  widget.equipoTemporal.teamConverter(),
+                                  widget.index!);
+                            } else {
+                              miController.addtolist(
+                                  widget.equipoTemporal.teamConverter());
+                            }
                             Navigator.pop(context);
                           }
                         },
