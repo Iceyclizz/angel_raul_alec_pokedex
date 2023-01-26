@@ -2,6 +2,7 @@ import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/fakemonlist.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/pokemonView.dart';
+import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:angel_raul_alec_pokedex/teamView.dart';
 import 'package:flutter/material.dart';
 
@@ -27,25 +28,34 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Pokedex(),
         '/fakemon': (context) => const FakemonView(),
         '/teamView': (context) => const teamView(),
-        '/fakemon/new':(context) => Fakemonform(),
-        '/teamCreator': (context) => const teamCreator(),
+        '/fakemon/new': (context) => Fakemonform(),
+        '/teamCreator': (context) => teamCreator(),
       },
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/pokemonView':
             return MaterialPageRoute(
-              builder: (context) =>
-                  Pokemonview(pokemon: (settings.arguments as Map)["objeto"] as Pokemon,index: (settings.arguments as Map)["index"] as int),
+              builder: (context) => Pokemonview(
+                  pokemon: (settings.arguments as Map)["objeto"] as Pokemon,
+                  index: (settings.arguments as Map)["index"] as int),
             );
-            case '/fakemon/edit':
+          case '/fakemon/edit':
             return MaterialPageRoute(
-              builder: (context) =>
-                  Fakemonform(fakemon: (settings.arguments as Map)["objeto"] as Pokemon,index: (settings.arguments as Map)["index"] as int,),
+              builder: (context) => Fakemonform(
+                fakemon: (settings.arguments as Map)["objeto"] as Pokemon,
+                index: (settings.arguments as Map)["index"] as int,
+              ),
+            );
+          case '/teamCreator/edit':
+            return MaterialPageRoute(
+              builder: (context) => teamCreator(
+                team: (settings.arguments as Map)["objeto"] as Team,
+                index: (settings.arguments as Map)["index"] as int,
+              ),
             );
           default:
-          return null;
+            return null;
         }
-        return null;
       },
     );
   }
@@ -74,7 +84,10 @@ class _PokedexState extends State<Pokedex> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () => Navigator.pushNamed(context, '/pokemonView',
-                      arguments: {"objeto": _controller.pokedex[index], "index": index}),
+                      arguments: {
+                        "objeto": _controller.pokedex[index],
+                        "index": index
+                      }),
                   child: ListTile(
                     title: Row(children: [
                       if (_controller.pokedex[index].image != null)

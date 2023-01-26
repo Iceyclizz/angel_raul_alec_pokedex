@@ -1,17 +1,29 @@
+import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:flutter/material.dart';
 import 'controller.dart';
 
 class teamCreator extends StatefulWidget {
-  const teamCreator({Key? key}) : super(key: key);
-
+  teamCreator({Key? key, this.team, this.index}) : super(key: key);
+  final Team? team;
+  final int? index;
+  TempTeam equipoTemporal = TempTeam();
   @override
   teamCreatorState createState() => teamCreatorState();
 }
 
 class teamCreatorState extends State<teamCreator> {
-  final Controller miController = Controller();
-  var nombreEquipo = '';
+  final Controller<Team> miController = Controller<Team>();
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      if (widget.team != null) {
+        widget.equipoTemporal = widget.team!.tempTeamConverter();
+      }
+    });
+  }
+
   final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -27,8 +39,29 @@ class teamCreatorState extends State<teamCreator> {
                 flex: 1,
                 child: Row(children: <Widget>[
                   Expanded(
+                    flex: 2,
+                    child: Card(
+                      color: Colors.black,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.close,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          if (_formkey.currentState != null &&
+                              _formkey.currentState!.validate()) {
+                            _formkey.currentState!.save();
+                            miController.addtolist(widget.equipoTemporal.teamConverter());
+                            Navigator.pop(context);
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                  Expanded(
                     flex: 9,
                     child: TextFormField(
+                      initialValue: widget.equipoTemporal.name,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Por favor, ingresa un nombre a tu equipo';
@@ -36,7 +69,7 @@ class teamCreatorState extends State<teamCreator> {
                         return null;
                       },
                       onSaved: (value) {
-                        nombreEquipo = value!;
+                        widget.equipoTemporal.name = value!;
                       },
                     ),
                   ),
@@ -53,14 +86,7 @@ class teamCreatorState extends State<teamCreator> {
                           if (_formkey.currentState != null &&
                               _formkey.currentState!.validate()) {
                             _formkey.currentState!.save();
-                            var equipo1 = Team(
-                                name: nombreEquipo,
-                                equipopokemon: [
-                                  miController.pokedex[1],
-                                  miController.pokedex[12],
-                                  miController.pokedex[20]
-                                ]);
-                            miController.equipo.add(equipo1);
+                            miController.equipo.add(widget.equipoTemporal.teamConverter());
                             Navigator.pop(context);
                           }
                         },
@@ -78,34 +104,20 @@ class teamCreatorState extends State<teamCreator> {
                       Expanded(
                           child: GestureDetector(
                         onTap: () {},
-                        child: const Card(
-                          color: Colors.grey,
-                          child: Center(
-                            child: Text(
-                              '+',
-                              style: TextStyle(
-                                fontSize: 40,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: getimage(widget.equipoTemporal.equipopokemon !=
+                                    null &&
+                                widget.equipoTemporal.equipopokemon!.isNotEmpty
+                            ? widget.equipoTemporal.equipopokemon![0]
+                            : null),
                       )),
                       Expanded(
                           child: GestureDetector(
                         onTap: () {},
-                        child: const Card(
-                          color: Colors.grey,
-                          child: Center(
-                            child: Text(
-                              '+',
-                              style: TextStyle(
-                                fontSize: 40,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: getimage(widget.equipoTemporal.equipopokemon !=
+                                    null &&
+                                widget.equipoTemporal.equipopokemon!.length > 1
+                            ? widget.equipoTemporal.equipopokemon![1]
+                            : null),
                       )),
                     ]),
                   ),
@@ -115,34 +127,20 @@ class teamCreatorState extends State<teamCreator> {
                       Expanded(
                           child: GestureDetector(
                         onTap: () {},
-                        child: const Card(
-                          color: Colors.grey,
-                          child: Center(
-                            child: Text(
-                              '+',
-                              style: TextStyle(
-                                fontSize: 40,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: getimage(widget.equipoTemporal.equipopokemon !=
+                                    null &&
+                                widget.equipoTemporal.equipopokemon!.length > 2
+                            ? widget.equipoTemporal.equipopokemon![2]
+                            : null),
                       )),
                       Expanded(
                           child: GestureDetector(
                         onTap: () {},
-                        child: const Card(
-                          color: Colors.grey,
-                          child: Center(
-                            child: Text(
-                              '+',
-                              style: TextStyle(
-                                fontSize: 40,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: getimage(widget.equipoTemporal.equipopokemon !=
+                                    null &&
+                                widget.equipoTemporal.equipopokemon!.length > 3
+                            ? widget.equipoTemporal.equipopokemon![3]
+                            : null),
                       )),
                     ]),
                   ),
@@ -152,34 +150,20 @@ class teamCreatorState extends State<teamCreator> {
                       Expanded(
                           child: GestureDetector(
                         onTap: () {},
-                        child: const Card(
-                          color: Colors.grey,
-                          child: Center(
-                            child: Text(
-                              '+',
-                              style: TextStyle(
-                                fontSize: 40,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: getimage(widget.equipoTemporal.equipopokemon !=
+                                    null &&
+                                widget.equipoTemporal.equipopokemon!.length > 4
+                            ? widget.equipoTemporal.equipopokemon![4]
+                            : null),
                       )),
                       Expanded(
                           child: GestureDetector(
                         onTap: () {},
-                        child: const Card(
-                          color: Colors.grey,
-                          child: Center(
-                            child: Text(
-                              '+',
-                              style: TextStyle(
-                                fontSize: 40,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: getimage(widget.equipoTemporal.equipopokemon !=
+                                    null &&
+                                widget.equipoTemporal.equipopokemon!.length > 5
+                            ? widget.equipoTemporal.equipopokemon![5]
+                            : null),
                       )),
                     ]),
                   ),
@@ -188,5 +172,32 @@ class teamCreatorState extends State<teamCreator> {
             ],
           ),
         ));
+  }
+
+  Widget getimage(Pokemon? f) {
+    if (f != null && f.image != null) {
+      return Card(
+          color: Colors.grey,
+          child: Center(
+            child: Image.memory(
+              f.image!.buffer
+                  .asUint8List(f.image!.offsetInBytes, f.image!.lengthInBytes),
+              fit: BoxFit.fill,
+            ),
+          ));
+    } else {
+      return const Card(
+        color: Colors.grey,
+        child: Center(
+          child: Text(
+            '+',
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      );
+    }
   }
 }

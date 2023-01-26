@@ -29,7 +29,7 @@ switch (pocketentity.runtimeType) {
       break;
     }
   }
-  void deletefromlist(T pocketentity,int index) {
+  void deletefromlist(T pocketentity, int index) {
     switch (pocketentity.runtimeType) {
       case Pokemon:
       fakemon.removeAt(index);

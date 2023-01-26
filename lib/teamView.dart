@@ -1,7 +1,6 @@
 import 'package:angel_raul_alec_pokedex/main.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:flutter/material.dart';
-
 import 'controller.dart';
 
 class teamView extends StatefulWidget {
@@ -32,6 +31,12 @@ class _PokemonviewState extends State<teamView> {
                         scale: 10),
               ]),
               subtitle: Text(miController.equipo[index].name),
+              onTap: () async {
+                Navigator.pushNamed(context, '/teamCreator/edit', arguments: {
+                  "objeto": miController.equipo[index],
+                  "index": index
+                });
+              },
             );
           },
         ),
