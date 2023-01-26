@@ -68,7 +68,7 @@ switch (pocketentity.runtimeType) {
 
   
 
-  Container getcontainertype(TypeList? type,{bool view =false}) {
+  Widget getcontainertype(TypeList? type,{bool view =false}) {
     final Color containerColor;
     Color textColor = Colors.black;
     final String poketype;
@@ -143,9 +143,11 @@ switch (pocketentity.runtimeType) {
       poketype = type.name.toUpperCase();
     }
     if (view){
-      return Container(
-      color: containerColor,
-      child: Text(
+      return 
+      ListTile(
+      tileColor: containerColor,
+      visualDensity: VisualDensity(vertical: -4),
+      title: Text(
         poketype,
         style: TextStyle(color: textColor),
         textAlign: TextAlign.center,
@@ -163,5 +165,34 @@ switch (pocketentity.runtimeType) {
       ),
     );
     
+  }
+  Future<bool> askUserDialog(BuildContext globalcontext,String pregunta)async{
+    bool answer=false;
+    await showDialog(
+        context: globalcontext,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(pregunta),
+            actions: <Widget>[
+              // add button
+              TextButton(
+                child: const Text('Aceptar'),
+                onPressed: () {
+              answer=true;
+              Navigator.pop(context);
+                },
+              ),
+              // cancel button
+              TextButton(
+                child: const Text('Cancelar'),
+                onPressed: () {
+                  answer=false;
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          );
+        });
+        return answer;
   }
 }

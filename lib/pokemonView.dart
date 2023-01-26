@@ -170,9 +170,7 @@ for (TypeList i in controller.tipos[tipo2]!['superefective']!) {
                   ),
                   for (TypeList i in tablatipos.keys)
                     if (tablatipos[i] == 0)
-                      ListTile(
-                        title: controller.getcontainertype(i,view: true),
-                      )
+                      controller.getcontainertype(i,view: true)
                 ],
               ),
             ))

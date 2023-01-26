@@ -38,7 +38,11 @@ class _FakemonformState extends State<Fakemonform> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fakemon Form'),
+        title: Row(children: [const Text('Fakemon Form'),IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {},
+              )],)
+        
       ),
       body: Form(
         child: Column(
@@ -193,13 +197,18 @@ class _FakemonformState extends State<Fakemonform> {
                 Expanded(child: Container(), flex: 1),
                 Expanded(
                     child: FloatingActionButton(
-                        onPressed: () {
-                          _controller.deletefromlist(
-                              widget.temppokemon.tempPokemonToPokemon(),
-                              widget.index!);
-                          Navigator.pop(context);
+                        onPressed: () async {
+                          if (await _controller.askUserDialog(
+                              context, 'Seguro que quieres eliminar')) {
+                            if (widget.index != null) {
+                              _controller.deletefromlist(
+                                  widget.temppokemon.tempPokemonToPokemon(),
+                                  widget.index!);
+                            }
+                            Navigator.pop(context);
+                          }
                         },
-                        tooltip: 'Añadir Tarea',
+                        tooltip: 'Eliminar Tarea',
                         heroTag: null,
                         child: const Icon(Icons.delete)),
                     flex: 1),
@@ -219,7 +228,7 @@ class _FakemonformState extends State<Fakemonform> {
                             Navigator.pop(context);
                           }
                         },
-                        tooltip: 'Añadir Tarea',
+                        tooltip: 'Guardar Pokemon',
                         heroTag: null,
                         child: const Icon(Icons.save)),
                     flex: 1),
