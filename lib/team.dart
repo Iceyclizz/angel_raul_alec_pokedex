@@ -7,9 +7,9 @@ class Team {
   @HiveField(0)
   final String name;
   @HiveField(1)
-  final List<Pokemon>? equipopokemon;
+  List<Pokemon> equipopokemon = <Pokemon>[];
 
-  Team({required this.name, this.equipopokemon});
+  Team({required this.name, required this.equipopokemon});
 
   TempTeam tempTeamConverter(){
     return TempTeam(name: name, equipopokemon: equipopokemon);
@@ -17,9 +17,9 @@ class Team {
 }
 class TempTeam {
   String? name;
-  List<Pokemon>? equipopokemon;
+  List<Pokemon> equipopokemon = <Pokemon>[];
 
-  TempTeam({this.name, this.equipopokemon});
+  TempTeam({this.name, required this.equipopokemon});
 
   Team teamConverter(){
     return Team(name: name!, equipopokemon: equipopokemon);

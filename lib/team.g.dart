@@ -18,7 +18,7 @@ class TeamAdapter extends TypeAdapter<Team> {
     };
     return Team(
       name: fields[0] as String,
-      equipopokemon: (fields[1] as List?)?.cast<Pokemon>(),
+      equipopokemon: (fields[1] as List).cast<Pokemon>(),
     );
   }
 
