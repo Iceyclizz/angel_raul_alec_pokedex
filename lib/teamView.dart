@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:angel_raul_alec_pokedex/main.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +28,7 @@ class _PokemonviewState extends State<teamView> {
                 if (miController.equipo[index].equipopokemon != null)
                   for (Pokemon p in miController.equipo[index].equipopokemon)
                     Image.memory(
-                        p.image!.buffer.asUint8List(
-                            p.image!.offsetInBytes, p.image!.lengthInBytes),
+                      base64Decode(p.image!),
                         scale: 10),
               ]),
               subtitle: Text(miController.equipo[index].name),

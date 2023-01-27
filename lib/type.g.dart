@@ -6,49 +6,9 @@ part of 'type.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PokemonTypeAdapter extends TypeAdapter<PokemonType> {
-  @override
-  final int typeId = 1;
-
-  @override
-  PokemonType read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return PokemonType(
-      name: fields[0] as TypeList,
-      debilidades: (fields[1] as List).cast<TypeList>(),
-      resistencia: (fields[2] as List).cast<TypeList>(),
-    );
-  }
-
-  @override
-  void write(BinaryWriter writer, PokemonType obj) {
-    writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.name)
-      ..writeByte(1)
-      ..write(obj.debilidades)
-      ..writeByte(2)
-      ..write(obj.resistencia);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PokemonTypeAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
 class TypeListAdapter extends TypeAdapter<TypeList> {
   @override
-  final int typeId = 3;
+  final int typeId = 1;
 
   @override
   TypeList read(BinaryReader reader) {

@@ -14,7 +14,7 @@ class Pokemon {
   @HiveField(3)
   final TypeList? type2;
   @HiveField(4)
-  ByteData? image;
+  String? image;
   @HiveField(5)
   final bool editable;
 
@@ -33,7 +33,7 @@ class TempPokemon{
   String? name;
   TypeList? type1;
   TypeList? type2;
-  ByteData? image;
+  String? image;
   bool editable;
 
   TempPokemon(

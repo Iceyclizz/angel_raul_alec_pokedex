@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/fakemonlist.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
@@ -5,12 +7,20 @@ import 'package:angel_raul_alec_pokedex/pokemonPicker.dart';
 import 'package:angel_raul_alec_pokedex/pokemonView.dart';
 import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:angel_raul_alec_pokedex/teamView.dart';
+import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'fakemonform.dart';
 import 'TeamCreator.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+    Hive
+    ..registerAdapter(PokemonAdapter())
+    ..registerAdapter(TypeListAdapter())
+    ..registerAdapter(TeamAdapter());
   runApp(const MyApp());
 }
 
@@ -100,12 +110,7 @@ class _PokedexState extends State<Pokedex> {
                     title: Row(children: [
                       if (_controller.pokedex[index].image != null)
                         Image.memory(
-                            _controller.pokedex[index].image!.buffer
-                                .asUint8List(
-                                    _controller
-                                        .pokedex[index].image!.offsetInBytes,
-                                    _controller
-                                        .pokedex[index].image!.lengthInBytes),
+                          base64Decode(_controller.pokedex[index].image!),
                             scale: 10),
                       Card(
                         child: Text("#${_controller.pokedex[index].no}"

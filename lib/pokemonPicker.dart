@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:flutter/material.dart';
@@ -43,12 +45,7 @@ class _pokemonPickerState extends State<pokemonPicker> {
                     title: Row(children: [
                       if (_controller.pokedex[index].image != null)
                         Image.memory(
-                            _controller.pokedex[index].image!.buffer
-                                .asUint8List(
-                                    _controller
-                                        .pokedex[index].image!.offsetInBytes,
-                                    _controller
-                                        .pokedex[index].image!.lengthInBytes),
+                          base64Decode(_controller.pokedex[index].image!),
                             scale: 10),
                       Card(
                         child: Text("#${_controller.pokedex[index].no}"

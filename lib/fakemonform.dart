@@ -1,4 +1,6 @@
 // ignore_for_file: sort_child_properties_last
+import 'dart:convert';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
@@ -65,14 +67,13 @@ if (await _controller.askUserDialog(
                   onTap: () async {
                     XFile? img = await ImagePicker()
                         .pickImage(source: ImageSource.gallery);
-                    ByteData? imgbytes;
+                    Uint8List? imgbytes;
                     if (img != null) {
-                      Uint8List uint8 = await img.readAsBytes();
-                      imgbytes = ByteData.view(uint8.buffer);
+                      imgbytes = await img.readAsBytes();
                     }
                     setState(() {
                       if (imgbytes != null) {
-                        widget.temppokemon.image = imgbytes;
+                        widget.temppokemon.image = base64Encode(imgbytes);
                       }
                     });
                   },
@@ -260,8 +261,7 @@ if (await _controller.askUserDialog(
           color: Colors.grey,
           child: Center(
             child: Image.memory(
-              f.image!.buffer
-                  .asUint8List(f.image!.offsetInBytes, f.image!.lengthInBytes),
+              base64Decode(f.image!),
               fit: BoxFit.fill,
             ),
           ));

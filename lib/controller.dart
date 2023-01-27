@@ -48,11 +48,11 @@ switch (pocketentity.runtimeType) {
 void uploadlist(T pocketentity) async {
     switch (pocketentity.runtimeType) {
       case Pokemon:
-      Box pocketbox = Hive.box<List<Pokemon>>('pokemons');
+      Box pocketbox = Hive.box('pokemons');
          pocketbox.put('fakedex', fakemon);
         break;
       case Team:
-      Box teambox = Hive.box<List<Team>>('equipospokemon');
+      Box teambox = Hive.box('equipospokemon');
         teambox.put('teams', equipo);
         break;
       default:

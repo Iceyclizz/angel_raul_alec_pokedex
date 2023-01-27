@@ -21,7 +21,7 @@ class PokemonAdapter extends TypeAdapter<Pokemon> {
       name: fields[1] as String,
       type1: fields[2] as TypeList,
       type2: fields[3] as TypeList?,
-      image: fields[4] as ByteData?,
+      image: fields[4] as String?,
       editable: fields[5] as bool,
     );
   }

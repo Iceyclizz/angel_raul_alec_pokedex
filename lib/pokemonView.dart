@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/type.dart';
@@ -26,9 +28,7 @@ class _PokemonviewState extends State<Pokemonview> {
               Expanded(
                 flex: 4,
                 child: Image.memory(
-                  widget.pokemon.image!.buffer.asUint8List(
-                      widget.pokemon.image!.offsetInBytes,
-                      widget.pokemon.image!.lengthInBytes),
+                  base64Decode(widget.pokemon.image!),
                 ),
               ),
             Expanded(

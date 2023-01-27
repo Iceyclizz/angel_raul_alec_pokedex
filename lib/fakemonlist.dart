@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:flutter/material.dart';
 
@@ -32,9 +34,7 @@ class _FakemonViewState extends State<FakemonView> {
               title: Row(children: [
                 if (_controller.fakemon[index].image != null)
                   Image.memory(
-                      _controller.fakemon[index].image!.buffer.asUint8List(
-                          _controller.fakemon[index].image!.offsetInBytes,
-                          _controller.fakemon[index].image!.lengthInBytes),
+                    base64Decode(_controller.fakemon[index].image!),
                       scale: 10),
                 Card(
                   child: Text(

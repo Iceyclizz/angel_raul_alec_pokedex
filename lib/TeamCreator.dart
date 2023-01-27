@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:flutter/material.dart';
@@ -226,8 +228,7 @@ class teamCreatorState extends State<teamCreator> {
           color: Colors.grey,
           child: Center(
             child: Image.memory(
-              f.image!.buffer
-                  .asUint8List(f.image!.offsetInBytes, f.image!.lengthInBytes),
+              base64Decode(f.image!),
               fit: BoxFit.fill,
             ),
           ));

@@ -1,7 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 part 'type.g.dart';
 
-@HiveType(typeId: 3)
+@HiveType(typeId: 1)
 enum TypeList {
   @HiveField(0)
   acero,
@@ -39,18 +39,4 @@ enum TypeList {
   veneno,
   @HiveField(17)
   volador
-}
-
-@HiveType(typeId: 1)
-class PokemonType {
-  @HiveField(0)
-  final TypeList name;
-  @HiveField(1)
-  final List<TypeList> debilidades;
-  @HiveField(2)
-  final List<TypeList> resistencia;
-  PokemonType(
-      {required this.name,
-      required this.debilidades,
-      required this.resistencia});
 }

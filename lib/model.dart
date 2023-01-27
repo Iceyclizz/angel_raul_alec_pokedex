@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:angel_raul_alec_pokedex/type.dart';
@@ -13,7 +15,7 @@ class Model {
 
   Model._internal();
   List<Team> equipo = <Team>[];
-
+  bool initialized = false;
   Map<TypeList, Map<String, List<TypeList>>> tipos = <TypeList, Map<String, List<TypeList>>>{
     TypeList.acero: {
       'superefective': [TypeList.fuego, TypeList.lucha, TypeList.tierra],
@@ -779,22 +781,21 @@ class Model {
 
 
   Future<void> initapp() async {
+    if (!initialized){
     for (Pokemon p in pokedex) {
       try {
         ByteData bytes = await rootBundle
             .load('lib/Pokemons fotos/${p.no.toString().padLeft(3, '0')}.png');
-        p.image = bytes;
+        p.image = base64Encode(bytes.buffer
+                  .asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
       } catch (e) {
         print('The image doesnt exist');
       }
     }
-    await Hive.initFlutter();
-    Hive.registerAdapter(PokemonAdapter());
-    Hive.registerAdapter(TypeListAdapter());
-    Hive.registerAdapter(TeamAdapter());
-    Box pocketbox = await Hive.openBox<List<Pokemon>>('pokemons');
-    fakemon = pocketbox.get('fakedex')?.values.toList ?? <Pokemon>[];
-    Box teambox = await Hive.openBox<List<Team>>('equipospokemon');
-    equipo = teambox.get('teams')?.values.toList ?? <Team>[];
-  }
+    Box pocketbox = await Hive.openBox('pokemons');
+    fakemon = pocketbox.get('fakedex')?.cast<Pokemon>() ?? <Pokemon>[];
+    Box teambox = await Hive.openBox('equipospokemon');
+    equipo = teambox.get('teams')?.cast<Team>() ?? <Team>[];
+    initialized=true;
+  }}
 }
