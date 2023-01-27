@@ -7,7 +7,7 @@ class teamCreator extends StatefulWidget {
   teamCreator({Key? key, this.team, this.index}) : super(key: key);
   final Team? team;
   final int? index;
-  TempTeam equipoTemporal = TempTeam();
+  TempTeam equipoTemporal = TempTeam(equipopokemon: <Pokemon>[]);
   @override
   teamCreatorState createState() => teamCreatorState();
 }
@@ -47,11 +47,14 @@ class teamCreatorState extends State<teamCreator> {
                           Icons.close,
                           color: Colors.white,
                         ),
-                        onPressed: () {
-                          if (_formkey.currentState != null &&
-                              _formkey.currentState!.validate()) {
-                            _formkey.currentState!.save();
-                            miController.addtolist(widget.equipoTemporal.teamConverter());
+                        onPressed: () async {
+                          if (await miController.askUserDialog(
+                              context, 'Seguro que quieres eliminar')) {
+                            if (widget.index != null) {
+                              miController.deletefromlist(
+                                  widget.equipoTemporal.teamConverter(),
+                                  widget.index!);
+                            }
                             Navigator.pop(context);
                           }
                         },
@@ -86,7 +89,14 @@ class teamCreatorState extends State<teamCreator> {
                           if (_formkey.currentState != null &&
                               _formkey.currentState!.validate()) {
                             _formkey.currentState!.save();
-                            miController.equipo.add(widget.equipoTemporal.teamConverter());
+                            if (widget.index != null) {
+                              miController.updatelist(
+                                  widget.equipoTemporal.teamConverter(),
+                                  widget.index!);
+                            } else {
+                              miController.addtolist(
+                                  widget.equipoTemporal.teamConverter());
+                            }
                             Navigator.pop(context);
                           }
                         },
@@ -103,44 +113,33 @@ class teamCreatorState extends State<teamCreator> {
                     child: Row(children: <Widget>[
                       Expanded(
                           child: GestureDetector(
-                        onTap: () {},
-                        child: getimage(widget.equipoTemporal.equipopokemon !=
-                                    null &&
-                                widget.equipoTemporal.equipopokemon!.isNotEmpty
-                            ? widget.equipoTemporal.equipopokemon![0]
-                            : null),
+                        onTap: () async {
+                          await Navigator.pushNamed(
+                              context, '/pokemonPicker/edit', arguments: {
+                            "objeto": widget.equipoTemporal.equipopokemon,
+                            "index": 0
+                          });
+                          setState(() {});
+                        },
+                        child: getimage(
+                            widget.equipoTemporal.equipopokemon.isNotEmpty
+                                ? widget.equipoTemporal.equipopokemon[0]
+                                : null),
                       )),
                       Expanded(
                           child: GestureDetector(
-                        onTap: () {},
-                        child: getimage(widget.equipoTemporal.equipopokemon !=
-                                    null &&
-                                widget.equipoTemporal.equipopokemon!.length > 1
-                            ? widget.equipoTemporal.equipopokemon![1]
-                            : null),
-                      )),
-                    ]),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Row(children: <Widget>[
-                      Expanded(
-                          child: GestureDetector(
-                        onTap: () {},
-                        child: getimage(widget.equipoTemporal.equipopokemon !=
-                                    null &&
-                                widget.equipoTemporal.equipopokemon!.length > 2
-                            ? widget.equipoTemporal.equipopokemon![2]
-                            : null),
-                      )),
-                      Expanded(
-                          child: GestureDetector(
-                        onTap: () {},
-                        child: getimage(widget.equipoTemporal.equipopokemon !=
-                                    null &&
-                                widget.equipoTemporal.equipopokemon!.length > 3
-                            ? widget.equipoTemporal.equipopokemon![3]
-                            : null),
+                        onTap: () async {
+                          await Navigator.pushNamed(
+                              context, '/pokemonPicker/edit', arguments: {
+                            "objeto": widget.equipoTemporal.equipopokemon,
+                            "index": 1
+                          });
+                          setState(() {});
+                        },
+                        child: getimage(
+                            widget.equipoTemporal.equipopokemon.length > 1
+                                ? widget.equipoTemporal.equipopokemon[1]
+                                : null),
                       )),
                     ]),
                   ),
@@ -149,21 +148,68 @@ class teamCreatorState extends State<teamCreator> {
                     child: Row(children: <Widget>[
                       Expanded(
                           child: GestureDetector(
-                        onTap: () {},
-                        child: getimage(widget.equipoTemporal.equipopokemon !=
-                                    null &&
-                                widget.equipoTemporal.equipopokemon!.length > 4
-                            ? widget.equipoTemporal.equipopokemon![4]
-                            : null),
+                        onTap: () async {
+                          await Navigator.pushNamed(
+                              context, '/pokemonPicker/edit', arguments: {
+                            "objeto": widget.equipoTemporal.equipopokemon,
+                            "index": 2
+                          });
+                          setState(() {});
+                        },
+                        child: getimage(
+                            widget.equipoTemporal.equipopokemon.length > 2
+                                ? widget.equipoTemporal.equipopokemon[2]
+                                : null),
                       )),
                       Expanded(
                           child: GestureDetector(
-                        onTap: () {},
-                        child: getimage(widget.equipoTemporal.equipopokemon !=
-                                    null &&
-                                widget.equipoTemporal.equipopokemon!.length > 5
-                            ? widget.equipoTemporal.equipopokemon![5]
-                            : null),
+                        onTap: () async {
+                          await Navigator.pushNamed(
+                              context, '/pokemonPicker/edit', arguments: {
+                            "objeto": widget.equipoTemporal.equipopokemon,
+                            "index": 3
+                          });
+                          setState(() {});
+                        },
+                        child: getimage(
+                            widget.equipoTemporal.equipopokemon.length > 3
+                                ? widget.equipoTemporal.equipopokemon[3]
+                                : null),
+                      )),
+                    ]),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Row(children: <Widget>[
+                      Expanded(
+                          child: GestureDetector(
+                        onTap: () async {
+                          await Navigator.pushNamed(
+                              context, '/pokemonPicker/edit', arguments: {
+                            "objeto": widget.equipoTemporal.equipopokemon,
+                            "index": 4
+                          });
+                          setState(() {});
+                        },
+                        child: getimage(
+                            widget.equipoTemporal.equipopokemon.length > 4
+                                ? widget.equipoTemporal.equipopokemon[4]
+                                : null),
+                      )),
+                      Expanded(
+                          child: GestureDetector(
+                        onTap: () async {
+                          await Navigator.pushNamed(
+                              context, '/pokemonPicker/edit', arguments: {
+                            "objeto": widget.equipoTemporal.equipopokemon,
+                            "index": 5
+                          });
+                          setState(() {});
+                        },
+                        child: getimage(
+                            widget.equipoTemporal.equipopokemon.length > 5
+                                ? widget.equipoTemporal.equipopokemon[5]
+                                : null),
                       )),
                     ]),
                   ),

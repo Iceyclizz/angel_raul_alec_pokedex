@@ -1,6 +1,7 @@
 import 'package:angel_raul_alec_pokedex/controller.dart';
 import 'package:angel_raul_alec_pokedex/fakemonlist.dart';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
+import 'package:angel_raul_alec_pokedex/pokemonPicker.dart';
 import 'package:angel_raul_alec_pokedex/pokemonView.dart';
 import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:angel_raul_alec_pokedex/teamView.dart';
@@ -50,6 +51,13 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(
               builder: (context) => teamCreator(
                 team: (settings.arguments as Map)["objeto"] as Team,
+                index: (settings.arguments as Map)["index"] as int,
+              ),
+            );
+          case '/pokemonPicker/edit':
+            return MaterialPageRoute(
+              builder: (context) => pokemonPicker(
+                equipoPokemon: (settings.arguments as Map)["objeto"] as List<Pokemon>,
                 index: (settings.arguments as Map)["index"] as int,
               ),
             );
