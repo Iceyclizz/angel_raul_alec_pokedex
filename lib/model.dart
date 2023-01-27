@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:angel_raul_alec_pokedex/type.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -792,6 +793,12 @@ class Model {
           print('The image doesnt exist');
         }
       }
+      WidgetsFlutterBinding.ensureInitialized();
+      await Hive.initFlutter();
+      Hive
+        ..registerAdapter(PokemonAdapter())
+        ..registerAdapter(TypeListAdapter())
+        ..registerAdapter(TeamAdapter());
       Box pocketbox = await Hive.openBox('pokemons');
       fakemon = pocketbox.get('fakedex')?.cast<Pokemon>() ?? <Pokemon>[];
       Box teambox = await Hive.openBox('equipospokemon');

@@ -15,12 +15,6 @@ import 'fakemonform.dart';
 import 'TeamCreator.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  Hive
-    ..registerAdapter(PokemonAdapter())
-    ..registerAdapter(TypeListAdapter())
-    ..registerAdapter(TeamAdapter());
   runApp(const MyApp());
 }
 
@@ -31,9 +25,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pokedex Chilena',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       routes: {
         '/': (context) => const Pokedex(),
@@ -147,9 +140,8 @@ class Hamburgesa extends StatelessWidget {
         const DrawerHeader(
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 36, 36, 36),
-            image: const DecorationImage(
-              image: NetworkImage(
-                  'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2a5c0ce5-7c29-462a-9766-844d53740d29/ddxh1ev-ef744da4-00ec-4f01-a4e7-2b4ea5958893.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzJhNWMwY2U1LTdjMjktNDYyYS05NzY2LTg0NGQ1Mzc0MGQyOVwvZGR4aDFldi1lZjc0NGRhNC0wMGVjLTRmMDEtYTRlNy0yYjRlYTU5NTg4OTMuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.bjqN7xDqDcq9zEc7IfTm6Cy_8RGRpy-W1HvKcUAs8aA'),
+            image: DecorationImage(
+              image: AssetImage('lib/Menu fotos/Hamburguesa.gif'),
               fit: BoxFit.fitHeight,
             ),
           ),
@@ -160,12 +152,12 @@ class Hamburgesa extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.format_list_numbered_outlined,
           ),
           title: const Text('Pokédex', style: TextStyle(fontSize: 19)),
           shape: RoundedRectangleBorder(
-            side: BorderSide(
+            side: const BorderSide(
               color: Color.fromARGB(255, 36, 36, 36),
             ),
             borderRadius: BorderRadius.circular(5.0),
@@ -179,13 +171,13 @@ class Hamburgesa extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.list_alt,
           ),
           title:
               const Text('Creador de equipo', style: TextStyle(fontSize: 19)),
           shape: RoundedRectangleBorder(
-            side: BorderSide(
+            side: const BorderSide(
               color: Color.fromARGB(255, 36, 36, 36),
             ),
             borderRadius: BorderRadius.circular(5.0),
@@ -199,12 +191,12 @@ class Hamburgesa extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.handyman,
           ),
           title: const Text('Fakemon', style: TextStyle(fontSize: 19)),
           shape: RoundedRectangleBorder(
-            side: BorderSide(
+            side: const BorderSide(
               color: Color.fromARGB(255, 36, 36, 36),
             ),
             borderRadius: BorderRadius.circular(5.0),
