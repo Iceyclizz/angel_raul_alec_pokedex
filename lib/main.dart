@@ -145,12 +145,30 @@ class Hamburgesa extends StatelessWidget {
       children: [
         const DrawerHeader(
           decoration: BoxDecoration(
-            color: Colors.red,
+            color: Color.fromARGB(255, 36, 36, 36),
+            image: const DecorationImage(
+              image: NetworkImage(
+                  'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2a5c0ce5-7c29-462a-9766-844d53740d29/ddxh1ev-ef744da4-00ec-4f01-a4e7-2b4ea5958893.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzJhNWMwY2U1LTdjMjktNDYyYS05NzY2LTg0NGQ1Mzc0MGQyOVwvZGR4aDFldi1lZjc0NGRhNC0wMGVjLTRmMDEtYTRlNy0yYjRlYTU5NTg4OTMuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.bjqN7xDqDcq9zEc7IfTm6Cy_8RGRpy-W1HvKcUAs8aA'),
+              fit: BoxFit.fitHeight,
+            ),
           ),
-          child: Text('Menu'),
+          child: Text(
+            'Menu',
+            style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
+          ),
         ),
         ListTile(
-          title: const Text('Pokédex'),
+          leading: Icon(
+            Icons.format_list_numbered_outlined,
+          ),
+          title: const Text('Pokédex', style: TextStyle(fontSize: 19)),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Color.fromARGB(255, 36, 36, 36),
+            ),
+            borderRadius: BorderRadius.circular(5.0),
+          ),
           onTap: () {
             if (ruta == '/') {
               Navigator.pop(context);
@@ -160,7 +178,17 @@ class Hamburgesa extends StatelessWidget {
           },
         ),
         ListTile(
-          title: const Text('Creador de equipo'),
+          leading: Icon(
+            Icons.list_alt,
+          ),
+          title:
+              const Text('Creador de equipo', style: TextStyle(fontSize: 19)),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Color.fromARGB(255, 36, 36, 36),
+            ),
+            borderRadius: BorderRadius.circular(5.0),
+          ),
           onTap: () {
             if (ruta == '/teamView') {
               Navigator.pop(context);
@@ -170,7 +198,16 @@ class Hamburgesa extends StatelessWidget {
           },
         ),
         ListTile(
-          title: const Text('Fakemon'),
+          leading: Icon(
+            Icons.handyman,
+          ),
+          title: const Text('Fakemon', style: TextStyle(fontSize: 19)),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Color.fromARGB(255, 36, 36, 36),
+            ),
+            borderRadius: BorderRadius.circular(5.0),
+          ),
           onTap: () {
             if (ruta == '/fakemon') {
               Navigator.pop(context);
