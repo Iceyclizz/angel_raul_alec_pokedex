@@ -17,7 +17,7 @@ import 'TeamCreator.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-    Hive
+  Hive
     ..registerAdapter(PokemonAdapter())
     ..registerAdapter(TypeListAdapter())
     ..registerAdapter(TeamAdapter());
@@ -67,7 +67,8 @@ class MyApp extends StatelessWidget {
           case '/pokemonPicker/edit':
             return MaterialPageRoute(
               builder: (context) => pokemonPicker(
-                equipoPokemon: (settings.arguments as Map)["objeto"] as List<Pokemon>,
+                equipoPokemon:
+                    (settings.arguments as Map)["objeto"] as List<Pokemon>,
                 index: (settings.arguments as Map)["index"] as int,
               ),
             );
@@ -110,7 +111,7 @@ class _PokedexState extends State<Pokedex> {
                     title: Row(children: [
                       if (_controller.pokedex[index].image != null)
                         Image.memory(
-                          base64Decode(_controller.pokedex[index].image!),
+                            base64Decode(_controller.pokedex[index].image!),
                             scale: 10),
                       Card(
                         child: Text("#${_controller.pokedex[index].no}"

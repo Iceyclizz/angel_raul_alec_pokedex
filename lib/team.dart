@@ -11,19 +11,18 @@ class Team {
 
   Team({required this.name, required this.equipopokemon});
 
-  TempTeam tempTeamConverter(){
+  TempTeam tempTeamConverter() {
     return TempTeam(name: name, equipopokemon: equipopokemon);
   }
 }
+
 class TempTeam {
   String? name;
   List<Pokemon> equipopokemon = <Pokemon>[];
 
   TempTeam({this.name, required this.equipopokemon});
 
-  Team teamConverter(){
+  Team teamConverter() {
     return Team(name: name!, equipopokemon: equipopokemon);
   }
 }
-
-

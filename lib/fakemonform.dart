@@ -40,23 +40,29 @@ class _FakemonformState extends State<Fakemonform> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(children: [
-          Expanded(flex: 9,child: const Text('Fakemon Form'),)
-          ,Expanded(child:IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: () async{
-if (await _controller.askUserDialog(
-                              context, 'Seguro que quieres eliminar la imagen?')) {
-                                setState(() {
-                                  widget.temppokemon.image =null;
-                                });
-                              }
-                },
-                alignment: Alignment.centerRight,
-              ) ,flex: 1,)
-          ],)
-        
-      ),
+          title: Row(
+        children: [
+          const Expanded(
+            flex: 9,
+            child: Text('Fakemon Form'),
+          ),
+          Expanded(
+            child: IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: () async {
+                if (await _controller.askUserDialog(
+                    context, 'Seguro que quieres eliminar la imagen?')) {
+                  setState(() {
+                    widget.temppokemon.image = null;
+                  });
+                }
+              },
+              alignment: Alignment.centerRight,
+            ),
+            flex: 1,
+          )
+        ],
+      )),
       body: Form(
         child: Column(
           children: [

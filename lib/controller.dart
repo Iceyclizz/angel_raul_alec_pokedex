@@ -15,50 +15,54 @@ class Controller<T> {
         equipo.add(pocketentity as Team);
         break;
       default:
-      break;
+        break;
     }
     uploadlist(pocketentity);
   }
-  void updatelist(T pocketentity,int index) {
-switch (pocketentity.runtimeType) {
+
+  void updatelist(T pocketentity, int index) {
+    switch (pocketentity.runtimeType) {
       case Pokemon:
-        fakemon[index]=pocketentity as Pokemon;
+        fakemon[index] = pocketentity as Pokemon;
         break;
       case Team:
-        equipo[index]=pocketentity as Team;
+        equipo[index] = pocketentity as Team;
         break;
       default:
-      break;
+        break;
     }
     uploadlist(pocketentity);
   }
+
   void deletefromlist(T pocketentity, int index) {
     switch (pocketentity.runtimeType) {
       case Pokemon:
-      fakemon.removeAt(index);
+        fakemon.removeAt(index);
         break;
       case Team:
         equipo.removeAt(index);
         break;
       default:
-      break;
+        break;
     }
     uploadlist(pocketentity);
   }
-void uploadlist(T pocketentity) async {
+
+  void uploadlist(T pocketentity) async {
     switch (pocketentity.runtimeType) {
       case Pokemon:
-      Box pocketbox = Hive.box('pokemons');
-         pocketbox.put('fakedex', fakemon);
+        Box pocketbox = Hive.box('pokemons');
+        pocketbox.put('fakedex', fakemon);
         break;
       case Team:
-      Box teambox = Hive.box('equipospokemon');
+        Box teambox = Hive.box('equipospokemon');
         teambox.put('teams', equipo);
         break;
       default:
-      break;
+        break;
     }
   }
+
   Future<void> initapp() async {
     WidgetsFlutterBinding.ensureInitialized();
     Model().initapp();
@@ -84,9 +88,7 @@ void uploadlist(T pocketentity) async {
     Model().tipos = value;
   }
 
-  
-
-  Widget getcontainertype(TypeList? type,{bool view =false}) {
+  Widget getcontainertype(TypeList? type, {bool view = false}) {
     final Color containerColor;
     Color textColor = Colors.black;
     final String poketype;
@@ -160,32 +162,31 @@ void uploadlist(T pocketentity) async {
     } else {
       poketype = type.name.toUpperCase();
     }
-    if (view){
-      return 
-      ListTile(
-      tileColor: containerColor,
-      visualDensity: const VisualDensity(vertical: -4),
-      title: Text(
-        poketype,
-        style: TextStyle(color: textColor),
-        textAlign: TextAlign.center,
-      ),
-    );
+    if (view) {
+      return ListTile(
+        tileColor: containerColor,
+        visualDensity: const VisualDensity(vertical: -4),
+        title: Text(
+          poketype,
+          style: TextStyle(color: textColor),
+          textAlign: TextAlign.center,
+        ),
+      );
     }
-      return Container(
+    return Container(
       color: containerColor,
-      padding: 
-      const EdgeInsets.all(3.0),
+      padding: const EdgeInsets.all(3.0),
       child: Text(
         poketype,
         style: TextStyle(color: textColor),
         textAlign: TextAlign.center,
       ),
     );
-    
   }
-  Future<bool> askUserDialog(BuildContext globalcontext,String pregunta)async{
-    bool answer=false;
+
+  Future<bool> askUserDialog(
+      BuildContext globalcontext, String pregunta) async {
+    bool answer = false;
     await showDialog(
         context: globalcontext,
         builder: (BuildContext context) {
@@ -196,21 +197,21 @@ void uploadlist(T pocketentity) async {
               TextButton(
                 child: const Text('Aceptar'),
                 onPressed: () {
-              answer=true;
-              Navigator.pop(context);
+                  answer = true;
+                  Navigator.pop(context);
                 },
               ),
               // cancel button
               TextButton(
                 child: const Text('Cancelar'),
                 onPressed: () {
-                  answer=false;
+                  answer = false;
                   Navigator.pop(context);
                 },
               )
             ],
           );
         });
-        return answer;
+    return answer;
   }
 }

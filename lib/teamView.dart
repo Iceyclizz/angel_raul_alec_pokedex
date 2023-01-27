@@ -27,16 +27,15 @@ class _PokemonviewState extends State<teamView> {
               title: Row(children: [
                 if (miController.equipo[index].equipopokemon != null)
                   for (Pokemon p in miController.equipo[index].equipopokemon)
-                    Image.memory(
-                      base64Decode(p.image!),
-                        scale: 10),
+                    Image.memory(base64Decode(p.image!), scale: 10),
               ]),
               subtitle: Text(miController.equipo[index].name),
               onTap: () async {
-                await Navigator.pushNamed(context, '/teamCreator/edit', arguments: {
-                  "objeto": miController.equipo[index],
-                  "index": index
-                });
+                await Navigator.pushNamed(context, '/teamCreator/edit',
+                    arguments: {
+                      "objeto": miController.equipo[index],
+                      "index": index
+                    });
                 setState(() {});
               },
             );

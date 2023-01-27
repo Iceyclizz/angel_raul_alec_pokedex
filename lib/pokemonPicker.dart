@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'dart:convert';
 
 import 'package:angel_raul_alec_pokedex/controller.dart';
@@ -16,8 +18,10 @@ class pokemonPicker extends StatefulWidget {
 }
 
 class _pokemonPickerState extends State<pokemonPicker> {
+  final List<String> dropdown= <String>['Originales','Creados'];
   final Controller _controller = Controller();
-  final List<Pokemon> listaUpdateable = Controller().pokedex;
+  List<Pokemon> listaUpdateable = Controller().pokedex;
+  String dropdownValue = 'Originales';
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -25,44 +29,92 @@ class _pokemonPickerState extends State<pokemonPicker> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Pokédex'),
+              title: Row(children: [
+          const Expanded(flex: 9,child: Text('Pokedex'),)
+          ,Expanded(child:IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: (){
+if (widget.equipoPokemon != null &&
+                        widget.equipoPokemon!.length >= widget.index + 1) {
+                      widget.equipoPokemon?.removeAt(widget.index);
+                    }
+                    Navigator.pop(context);
+                },
+                alignment: Alignment.centerRight,
+              ) ,flex: 1,)
+          ],),
             ),
-            body: ListView.builder(
-              itemCount: _controller.pokedex.length,
+            body: Column(children: [Expanded(child: DropdownButton<String>(
+                            value: dropdownValue,
+                            icon: const Icon(Icons.arrow_downward),
+                            elevation: 16,
+                            style: const TextStyle(color: Colors.blue),
+                            underline: Container(
+                              height: 2,
+                              color: Colors.blueAccent,
+                            ),
+                            onChanged: (String? value) {
+                              // This is called when the user selects an item.
+                              setState(() {
+                                dropdownValue = value!;
+                                switch(value){
+                                  case 'Originales':
+                                  listaUpdateable=_controller.pokedex;
+                                  break;
+                                  case 'Creados':
+                                  listaUpdateable=_controller.fakemon;
+                                  break;
+                                  default:break;
+                                }
+                              });
+                            },
+                            items: dropdown
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  textAlign: TextAlign.center,
+                                ),
+                              );
+                            }).toList(),
+                          ),flex: 1,),
+                          Expanded(child: ListView.builder(
+              itemCount: listaUpdateable.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
                     if (widget.equipoPokemon != null &&
                         widget.equipoPokemon!.length >= widget.index + 1) {
                       widget.equipoPokemon?.removeAt(widget.index);
-                      widget.equipoPokemon?.add(_controller.pokedex[index]);
+                      widget.equipoPokemon?.add(listaUpdateable[index]);
                     } else {
-                      widget.equipoPokemon?.add(_controller.pokedex[index]);
+                      widget.equipoPokemon?.add(listaUpdateable[index]);
                     }
                     Navigator.pop(context);
                   },
                   child: ListTile(
                     title: Row(children: [
-                      if (_controller.pokedex[index].image != null)
+                      if (listaUpdateable[index].image != null)
                         Image.memory(
-                          base64Decode(_controller.pokedex[index].image!),
+                          base64Decode(listaUpdateable[index].image!),
                             scale: 10),
                       Card(
-                        child: Text("#${_controller.pokedex[index].no}"
-                            "\t"
-                            "${_controller.pokedex[index].name}"),
+                        child: Text('${(listaUpdateable[index].no==null?"":"#${listaUpdateable[index].no} ")}${listaUpdateable[index].name}'),
                       )
                     ]),
                     subtitle: Row(children: [
                       _controller
-                          .getcontainertype(_controller.pokedex[index].type1),
+                          .getcontainertype(listaUpdateable[index].type1),
                       _controller
-                          .getcontainertype(_controller.pokedex[index].type2)
+                          .getcontainertype(listaUpdateable[index].type2)
                     ]),
                   ),
                 );
               },
-            ),
+            ),flex: 9,)
+                          ],)
+            
           );
         });
   }
