@@ -24,7 +24,7 @@ class _PokemonviewState extends State<teamView> {
             return ListTile(
               title: Row(children: [
                 if (miController.equipo[index].equipopokemon != null)
-                  for (Pokemon p in miController.equipo[index].equipopokemon!)
+                  for (Pokemon p in miController.equipo[index].equipopokemon)
                     Image.memory(
                         p.image!.buffer.asUint8List(
                             p.image!.offsetInBytes, p.image!.lengthInBytes),
