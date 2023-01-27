@@ -2,6 +2,7 @@ import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class Model {
   static final Model _model = Model._internal();
@@ -11,9 +12,9 @@ class Model {
   }
 
   Model._internal();
-  var equipo = <Team>[];
+  List<Team> equipo = <Team>[];
 
-  var tipos = <TypeList, Map<String, List<TypeList>>>{
+  Map<TypeList, Map<String, List<TypeList>>> tipos = <TypeList, Map<String, List<TypeList>>>{
     TypeList.acero: {
       'superefective': [TypeList.fuego, TypeList.lucha, TypeList.tierra],
       'resistant': [
@@ -166,8 +167,8 @@ class Model {
       'immunities': [TypeList.tierra]
     }
   };
-  var fakemon = <Pokemon>[];
-  var pokedex = <Pokemon>[
+  List<Pokemon> fakemon = <Pokemon>[];
+  List<Pokemon> pokedex = <Pokemon>[
     Pokemon(
         no: 1,
         name: 'Bulbasur',
@@ -775,6 +776,8 @@ class Model {
         type1: TypeList.psiquico,
         type2: TypeList.planta),
   ];
+
+
   Future<void> initapp() async {
     for (Pokemon p in pokedex) {
       try {
@@ -785,5 +788,13 @@ class Model {
         print('The image doesnt exist');
       }
     }
+    await Hive.initFlutter();
+    Hive.registerAdapter(PokemonAdapter());
+    Hive.registerAdapter(TypeListAdapter());
+    Hive.registerAdapter(TeamAdapter());
+    Box pocketbox = await Hive.openBox<List<Pokemon>>('pokemons');
+    fakemon = pocketbox.get('fakedex')?.values.toList ?? <Pokemon>[];
+    Box teambox = await Hive.openBox<List<Team>>('equipospokemon');
+    equipo = teambox.get('teams')?.values.toList ?? <Team>[];
   }
 }

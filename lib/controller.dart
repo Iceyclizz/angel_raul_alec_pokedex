@@ -3,6 +3,7 @@ import 'package:angel_raul_alec_pokedex/pokemon.dart';
 import 'package:angel_raul_alec_pokedex/team.dart';
 import 'package:angel_raul_alec_pokedex/type.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class Controller<T> {
   void addtolist(T pocketentity) {
@@ -16,6 +17,7 @@ class Controller<T> {
       default:
       break;
     }
+    uploadlist(pocketentity);
   }
   void updatelist(T pocketentity,int index) {
 switch (pocketentity.runtimeType) {
@@ -28,6 +30,7 @@ switch (pocketentity.runtimeType) {
       default:
       break;
     }
+    uploadlist(pocketentity);
   }
   void deletefromlist(T pocketentity, int index) {
     switch (pocketentity.runtimeType) {
@@ -36,6 +39,21 @@ switch (pocketentity.runtimeType) {
         break;
       case Team:
         equipo.removeAt(index);
+        break;
+      default:
+      break;
+    }
+    uploadlist(pocketentity);
+  }
+void uploadlist(T pocketentity) async {
+    switch (pocketentity.runtimeType) {
+      case Pokemon:
+      Box pocketbox = Hive.box<List<Pokemon>>('pokemons');
+         pocketbox.put('fakedex', fakemon);
+        break;
+      case Team:
+      Box teambox = Hive.box<List<Team>>('equipospokemon');
+        teambox.put('teams', equipo);
         break;
       default:
       break;

@@ -38,10 +38,21 @@ class _FakemonformState extends State<Fakemonform> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(children: [const Text('Fakemon Form'),IconButton(
+        title: Row(children: [
+          Expanded(flex: 9,child: const Text('Fakemon Form'),)
+          ,Expanded(child:IconButton(
                 icon: const Icon(Icons.delete),
-                onPressed: () {},
-              )],)
+                onPressed: () async{
+if (await _controller.askUserDialog(
+                              context, 'Seguro que quieres eliminar la imagen?')) {
+                                setState(() {
+                                  widget.temppokemon.image =null;
+                                });
+                              }
+                },
+                alignment: Alignment.centerRight,
+              ) ,flex: 1,)
+          ],)
         
       ),
       body: Form(
@@ -199,7 +210,7 @@ class _FakemonformState extends State<Fakemonform> {
                     child: FloatingActionButton(
                         onPressed: () async {
                           if (await _controller.askUserDialog(
-                              context, 'Seguro que quieres eliminar')) {
+                              context, 'Seguro que quieres eliminar?')) {
                             if (widget.index != null) {
                               _controller.deletefromlist(
                                   widget.temppokemon.tempPokemonToPokemon(),
